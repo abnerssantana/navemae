@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { Menu, X, Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import { motion, AnimatePresence } from "framer-motion"
+import { LogoText } from "@/components/logo-text"
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -40,9 +40,6 @@ export function Navbar() {
     setTheme(theme === "dark" ? "light" : "dark")
   }
 
-  // Determine the logo source based on the current theme
-  const logoSrc = theme === "dark" ? "/logo-white.png" : "/logo.png"
-
   // Don't render anything until after hydration to avoid UI flicker
   if (!mounted) return null
 
@@ -55,25 +52,8 @@ export function Navbar() {
       }`}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Image 
-              src={logoSrc} 
-              alt="Nave Mãe Logo" 
-              width={110} 
-              height={30} 
-              className="h-8 w-auto"
-              onError={(e) => {
-                // Fallback if logo isn't available
-                e.currentTarget.src = "/placeholder.svg";
-              }}
-            />
-          </motion.div>
-        </Link>
+        {/* Replace Image with the new LogoText component */}
+        <LogoText />
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-8">

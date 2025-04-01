@@ -22,6 +22,7 @@ import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { Navbar } from "@/components/navbar"
 import { ServiceCard } from "@/components/service-card"
+import { LogoText } from "@/components/logo-text"
 
 export default function Home() {
   const { theme } = useTheme()
@@ -166,6 +167,22 @@ export default function Home() {
           <div className="absolute inset-0 -z-10 overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+
+            {/* Imagem do OVNI no canto direito */}
+            <motion.div
+              className="absolute right-20 top-1/2 transform -translate-y-1/2 w-64 h-64"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 0.8, x: 0 }}
+              transition={{ delay: 0.6, duration: 1 }}
+            >
+              <Image
+                src="/ovni.svg"
+                alt="OVNI"
+                width={256}
+                height={256}
+                className="object-contain"
+              />
+            </motion.div>
           </div>
         </section>
 
@@ -434,17 +451,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <Image
-                  src={logoSrc}
-                  alt="Nave Mãe Logo"
-                  width={110}
-                  height={30}
-                  className="h-8 w-auto"
-                  onError={(e) => {
-                    // Fallback if logo isn't available
-                    e.currentTarget.src = "/placeholder.svg";
-                  }}
-                />
+                {/* Replace Image with LogoText */}
+                <LogoText size="lg" />
               </div>
               <p className="text-muted-foreground max-w-xs">
                 Desenvolvimento web profissional com foco em resultados.
