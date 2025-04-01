@@ -1,298 +1,143 @@
 "use client"
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { motion } from "framer-motion"
 
 export function PerformanceSection() {
+  // Performance metrics data
+  const performanceData = {
+    speed: [
+      { metric: "First Contentful Paint", value: "0.8s", rating: "Excelente" },
+      { metric: "Largest Contentful Paint", value: "1.2s", rating: "Ótimo" },
+      { metric: "Cumulative Layout Shift", value: "0.02", rating: "Excelente" },
+      { metric: "Time to Interactive", value: "1.5s", rating: "Muito bom" }
+    ],
+    seo: [
+      { metric: "SEO Score", value: "92/100", rating: "Excelente" },
+      { metric: "Mobile Friendliness", value: "98/100", rating: "Excelente" },
+      { metric: "Content Quality", value: "88/100", rating: "Muito bom" },
+      { metric: "Backlink Profile", value: "85/100", rating: "Muito bom" }
+    ],
+    engagement: [
+      { metric: "Average Session Duration", value: "2m 45s", rating: "Acima da média" },
+      { metric: "Pages Per Session", value: "3.2", rating: "Bom" },
+      { metric: "Bounce Rate", value: "32%", rating: "Excelente" },
+      { metric: "Conversion Rate", value: "4.8%", rating: "Acima da média" }
+    ]
+  }
+
   return (
-    <div className="border rounded-md overflow-hidden">
-      <Tabs defaultValue="speed" className="w-full">
-        <div className="border-b px-4">
-          <TabsList className="h-12 bg-transparent">
-            <TabsTrigger
-              value="speed"
-              className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none"
-            >
-              Speed Metrics
-            </TabsTrigger>
-            <TabsTrigger
-              value="seo"
-              className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none"
-            >
-              SEO Analysis
-            </TabsTrigger>
-            <TabsTrigger
-              value="user"
-              className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none"
-            >
-              User Engagement
-            </TabsTrigger>
-          </TabsList>
+    <div className="bg-white dark:bg-card rounded-lg p-6 space-y-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h3 className="text-xl font-medium mb-6">Métricas de Performance</h3>
+        
+        <div className="space-y-6">
+          {/* Speed Metrics */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="space-y-4"
+          >
+            <h4 className="text-primary font-medium">Velocidade & Performance</h4>
+            <div className="grid grid-cols-1 gap-3">
+              {performanceData.speed.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1 + 0.2 }}
+                  className="flex justify-between items-center"
+                >
+                  <span className="text-sm">{item.metric}</span>
+                  <div className="text-right">
+                    <motion.span 
+                      className="font-medium" 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.1 + 0.4, duration: 0.8 }}
+                    >
+                      {item.value}
+                    </motion.span>
+                    <span className="text-xs text-primary ml-2">({item.rating})</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* SEO Metrics */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="space-y-4"
+          >
+            <h4 className="text-primary font-medium">SEO & Visibilidade</h4>
+            <div className="grid grid-cols-1 gap-3">
+              {performanceData.seo.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1 + 0.6 }}
+                  className="flex justify-between items-center"
+                >
+                  <span className="text-sm">{item.metric}</span>
+                  <div className="text-right">
+                    <motion.span 
+                      className="font-medium" 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.1 + 0.8, duration: 0.8 }}
+                    >
+                      {item.value}
+                    </motion.span>
+                    <span className="text-xs text-primary ml-2">({item.rating})</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Engagement Metrics */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="space-y-4"
+          >
+            <h4 className="text-primary font-medium">Engajamento do Usuário</h4>
+            <div className="grid grid-cols-1 gap-3">
+              {performanceData.engagement.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1 + 1.0 }}
+                  className="flex justify-between items-center"
+                >
+                  <span className="text-sm">{item.metric}</span>
+                  <div className="text-right">
+                    <motion.span 
+                      className="font-medium" 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.1 + 1.2, duration: 0.8 }}
+                    >
+                      {item.value}
+                    </motion.span>
+                    <span className="text-xs text-primary ml-2">({item.rating})</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-        <TabsContent value="speed" className="p-6 space-y-6 mt-0">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">First Contentful Paint</span>
-                <span className="text-sm font-medium">0.8s</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "85%" }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Largest Contentful Paint</span>
-                <span className="text-sm font-medium">1.2s</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "75%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Cumulative Layout Shift</span>
-                <span className="text-sm font-medium">0.02</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "95%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Time to Interactive</span>
-                <span className="text-sm font-medium">1.5s</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "70%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-          </div>
-        </TabsContent>
-        
-        <TabsContent value="seo" className="p-6 space-y-6 mt-0">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">SEO Score</span>
-                <span className="text-sm font-medium">92/100</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "92%" }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Mobile Friendliness</span>
-                <span className="text-sm font-medium">98/100</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "98%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Content Quality</span>
-                <span className="text-sm font-medium">88/100</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "88%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Backlink Profile</span>
-                <span className="text-sm font-medium">85/100</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "85%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-          </div>
-        </TabsContent>
-        
-        <TabsContent value="user" className="p-6 space-y-6 mt-0">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Average Session Duration</span>
-                <span className="text-sm font-medium">2m 45s</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "80%" }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Pages Per Session</span>
-                <span className="text-sm font-medium">3.2</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "75%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Bounce Rate</span>
-                <span className="text-sm font-medium">32%</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "68%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Conversion Rate</span>
-                <span className="text-sm font-medium">4.8%</span>
-              </div>
-              <motion.div 
-                className="h-1 w-full bg-muted overflow-hidden rounded-full"
-                initial={{ opacity: 0.6 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.div 
-                  className="h-full bg-primary rounded-full"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "65%" }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </motion.div>
-            </div>
-          </div>
-        </TabsContent>
-      </Tabs>
+      </motion.div>
     </div>
   )
 }
