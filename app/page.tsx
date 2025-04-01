@@ -26,7 +26,6 @@ import {
   FadeIn,
 } from "@/components/motion"
 import { ServiceCard } from "@/components/service-card"
-import { PerformanceSection } from "@/components/performance-section"
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false)
@@ -323,93 +322,6 @@ export default function Home() {
                 ))}
               </div>
             </StaggerChildren>
-          </div>
-        </section>
-
-        <section id="sobre" className="py-16 md:py-24">
-          <div className="container px-4 mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <FadeUp>
-                <div className="space-y-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 text-sm rounded-full border mb-2 bg-primary/5">
-                    <BarChart3 className="h-4 w-4 text-primary" />
-                    <span>Performance em Primeiro Lugar</span>
-                  </div>
-
-                  <h2 className="text-2xl sm:text-3xl font-medium">Especialistas em Web Development</h2>
-
-                  <p className="text-muted-foreground">
-                    Na Nave Mãe, combinamos expertise técnica com design criativo para entregar sites que não apenas
-                    parecem ótimos, mas também têm desempenho excepcional.
-                  </p>
-
-                  <ul className="space-y-4">
-                    <motion.li
-                      className="flex items-start gap-3"
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    >
-                      <div className="bg-primary/10 p-1 rounded-full mt-0.5">
-                        <Zap className="h-4 w-4 text-primary" />
-                      </div>
-                      <div>
-                        <span className="font-medium">Sites Otimizados</span>
-                        <p className="text-sm text-muted-foreground">
-                          Criamos sites rápidos e otimizados com excelentes pontuações de desempenho.
-                        </p>
-                      </div>
-                    </motion.li>
-
-                    <motion.li
-                      className="flex items-start gap-3"
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    >
-                      <div className="bg-primary/10 p-1 rounded-full mt-0.5">
-                        <Smartphone className="h-4 w-4 text-primary" />
-                      </div>
-                      <div>
-                        <span className="font-medium">Responsivos em Todos os Dispositivos</span>
-                        <p className="text-sm text-muted-foreground">
-                          Designs modernos que garantem uma experiência perfeita em qualquer tela.
-                        </p>
-                      </div>
-                    </motion.li>
-
-                    <motion.li
-                      className="flex items-start gap-3"
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    >
-                      <div className="bg-primary/10 p-1 rounded-full mt-0.5">
-                        <Search className="h-4 w-4 text-primary" />
-                      </div>
-                      <div>
-                        <span className="font-medium">SEO Avançado</span>
-                        <p className="text-sm text-muted-foreground">
-                          Arquitetura amigável para SEO para melhores classificações nos motores de busca.
-                        </p>
-                      </div>
-                    </motion.li>
-                  </ul>
-
-                  <div>
-                    <Button asChild>
-                      <Link href="#portfolio">
-                        Ver Exemplos
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </FadeUp>
-
-              <FadeUp delay={0.4}>
-                <div className="bg-white dark:bg-card rounded-lg shadow-lg p-4">
-                  <PerformanceSection />
-                </div>
-              </FadeUp>
-            </div>
           </div>
         </section>
 
