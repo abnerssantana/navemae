@@ -69,8 +69,8 @@ export function Navbar({ isDarkMode = false }: NavbarProps) {
         
         {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm md:hidden">
-            <div className="container h-full flex flex-col pt-20 px-4">
+          <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm md:hidden mt-13 h-screen">
+            <div className="container h-full flex flex-col pt-4 px-4">
               <nav className="flex flex-col gap-6 text-lg">
                 <Link href="#servicos" onClick={() => setMobileMenuOpen(false)}>
                   Serviços
