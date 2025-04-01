@@ -2,12 +2,13 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500"] })
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
 
 export const metadata: Metadata = {
-  title: "Nave Mãe | Agência de Desenvolvimento Web",
-  description: "Serviços profissionais de desenvolvimento web para construir, escalar e otimizar sua presença online.",
+  title: "Nave Mãe | Desenvolvimento Web Profissional",
+  description: "Desenvolvimento web profissional para construir, escalar e otimizar sua presença online. Especialistas em sites dinâmicos, WordPress e SEO.",
 }
 
 export default function RootLayout({
@@ -16,9 +17,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
-
