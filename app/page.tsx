@@ -2,31 +2,30 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { 
-  Code, 
-  Compass, 
-  Construction, 
-  Layers, 
-  Rocket, 
-  Smartphone, 
-  Search, 
-  Zap, 
+import {
+  Code,
+  Compass,
+  Construction,
+  Layers,
+  Rocket,
+  Smartphone,
+  Search,
+  Zap,
   BarChart3,
   ArrowRight
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { CssBuilder } from "@/components/css-builder"
-import { 
-  HeroWrapper, 
-  FadeUp, 
-  StaggerChildren, 
-  FadeIn, 
-  AnimatedHeroText,
-  BlinkingCursor
+import {
+  HeroWrapper,
+  FadeUp,
+  StaggerChildren,
+  FadeIn,
 } from "@/components/motion"
 import { ServiceCard } from "@/components/service-card"
 import { PerformanceSection } from "@/components/performance-section"
+import { WebBuildingProcess } from "@/components/web-building-process"
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false)
@@ -146,7 +145,7 @@ export default function Home() {
 
             <div className="container mx-auto px-4 max-w-5xl text-center">
               <FadeIn delay={0.2}>
-                <motion.div 
+                <motion.div
                   className="inline-flex items-center gap-2 px-3 py-1 text-sm rounded-full border mb-8 bg-muted/30"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -168,7 +167,7 @@ export default function Home() {
                 </p>
               </FadeUp>
 
-              <motion.div 
+              <motion.div
                 className="mt-10 flex flex-wrap justify-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -177,14 +176,14 @@ export default function Home() {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button size="lg" className="h-12 px-6 relative overflow-hidden">
                     <span className="relative z-10">Iniciar Projeto</span>
-                    <motion.span 
+                    <motion.span
                       className="absolute inset-0 bg-primary opacity-50"
                       animate={{ scale: [1, 1.2, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
                   </Button>
                 </motion.div>
-                
+
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button size="lg" variant="outline" className="h-12 px-6">
                     Ver Nosso Trabalho
@@ -195,6 +194,7 @@ export default function Home() {
           </section>
         </HeroWrapper>
 
+        // Then in your page markup, replace this section:
         <section className="py-20 bg-muted/30">
           <div className="container max-w-5xl mx-auto px-4">
             <FadeUp>
@@ -241,18 +241,18 @@ export default function Home() {
             <StaggerChildren staggerDelay={0.1}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {services.map((service, index) => (
-                  <motion.div 
+                  <motion.div
                     key={index}
                     variants={{
                       hidden: { opacity: 0, y: 20 },
                       visible: { opacity: 1, y: 0 }
                     }}
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.02,
-                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)" 
+                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)"
                     }}
                   >
-                    <ServiceCard 
+                    <ServiceCard
                       icon={service.icon}
                       title={service.title}
                       description={service.description}
@@ -273,16 +273,16 @@ export default function Home() {
                     <BarChart3 className="h-4 w-4" />
                     <span>Performance em Primeiro Lugar</span>
                   </div>
-                  
+
                   <h2 className="text-3xl font-medium">Especialistas em Web Development</h2>
-                  
+
                   <p className="text-muted-foreground">
                     Na Nave Mãe, combinamos expertise técnica com design criativo para entregar sites que não apenas
                     parecem ótimos, mas também têm desempenho excepcional.
                   </p>
 
                   <ul className="space-y-4">
-                    <motion.li 
+                    <motion.li
                       className="flex items-start gap-3"
                       whileHover={{ x: 5 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -297,8 +297,8 @@ export default function Home() {
                         </p>
                       </div>
                     </motion.li>
-                    
-                    <motion.li 
+
+                    <motion.li
                       className="flex items-start gap-3"
                       whileHover={{ x: 5 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -313,8 +313,8 @@ export default function Home() {
                         </p>
                       </div>
                     </motion.li>
-                    
-                    <motion.li 
+
+                    <motion.li
                       className="flex items-start gap-3"
                       whileHover={{ x: 5 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -330,7 +330,7 @@ export default function Home() {
                       </div>
                     </motion.li>
                   </ul>
-                  
+
                   <div>
                     <Button asChild>
                       <Link href="#portfolio">
@@ -365,7 +365,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3].map((item) => (
                 <FadeUp key={item} delay={0.2 * item}>
-                  <motion.div 
+                  <motion.div
                     className="relative overflow-hidden rounded-lg aspect-video bg-muted"
                     whileHover={{ y: -5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -378,7 +378,7 @@ export default function Home() {
                 </FadeUp>
               ))}
             </div>
-            
+
             <div className="mt-12 text-center">
               <Button variant="outline">Ver Todos os Projetos</Button>
             </div>
@@ -395,10 +395,10 @@ export default function Home() {
                   seus objetivos de negócio.
                 </p>
               </FadeUp>
-              
+
               <FadeUp delay={0.2}>
-                <motion.div 
-                  whileHover={{ scale: 1.05 }} 
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Button size="lg" className="h-12 px-8">
@@ -412,7 +412,7 @@ export default function Home() {
         </section>
       </main>
 
-      <motion.footer 
+      <motion.footer
         className="border-t py-12 bg-muted/10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -429,7 +429,7 @@ export default function Home() {
                 Desenvolvimento web profissional com foco em performance, design e resultados.
               </p>
             </div>
-            
+
             <div>
               <h3 className="font-medium mb-4">Serviços</h3>
               <ul className="space-y-2">
@@ -455,7 +455,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="font-medium mb-4">Empresa</h3>
               <ul className="space-y-2">
@@ -481,7 +481,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="font-medium mb-4">Contato</h3>
               <ul className="space-y-2">
@@ -490,7 +490,7 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Nave Mãe. Todos os direitos reservados.
