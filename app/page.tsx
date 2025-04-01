@@ -24,7 +24,6 @@ import {
 } from "@/components/motion"
 import { ServiceCard } from "@/components/service-card"
 import { PerformanceSection } from "@/components/performance-section"
-import DevelopmentJourney from "@/components/development-journey"
 
 
 export default function Home() {
@@ -193,11 +192,7 @@ export default function Home() {
             </div>
           </section>
         </HeroWrapper>
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <DevelopmentJourney />
-          </div>
-        </section>
+       
         <section id="servicos" className="py-24">
           <div className="container max-w-6xl mx-auto px-4">
             <FadeUp>

@@ -2,149 +2,152 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Paintbrush, Code, Database, Smartphone, Rocket, 
-  ChevronRight, ChevronDown, Zap, Search, Globe, Server 
+  ChevronRight, ChevronDown, Zap, Search, Globe, Server, Info,
+  ChevronsRight
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const DevelopmentJourney = () => {
-  const [activeNode, setActiveNode] = useState(null);
-  const [expandedNode, setExpandedNode] = useState(null);
+  // Inicializa com a primeira etapa (discovery) já aberta
+  const [activeNode, setActiveNode] = useState("discovery");
+  const [expandedNode, setExpandedNode] = useState("discovery");
   const [showCode, setShowCode] = useState(false);
+  const [showTip, setShowTip] = useState(true);
   
-  // Define the journey nodes
+  // Define os nós da jornada
   const journeyNodes = [
     {
       id: 'discovery',
-      title: 'Discovery',
+      title: 'Descoberta',
+      shortDesc: 'Análise e planejamento',
       icon: <Search className="h-5 w-5" />,
       color: 'bg-blue-500',
-      description: 'We analyze your needs, audience, and goals to create a strategic roadmap.',
+      description: 'Analisamos suas necessidades, público e objetivos para criar um roteiro estratégico.',
       details: [
-        'Audience research and user personas',
-        'Competitive analysis',
-        'Project requirements and goals',
-        'Content strategy planning',
-        'Technical specifications',
+        'Pesquisa de público e personas de usuário',
+        'Análise competitiva',
+        'Requisitos e objetivos do projeto',
+        'Planejamento de estratégia de conteúdo',
+        'Especificações técnicas',
       ],
-      technologies: ['User Research', 'Analytics', 'SEO Audit', 'Content Strategy']
+      technologies: ['Pesquisa de Usuário', 'Analytics', 'Auditoria SEO', 'Estratégia de Conteúdo']
     },
     {
       id: 'design',
       title: 'Design',
+      shortDesc: 'UI/UX e identidade visual',
       icon: <Paintbrush className="h-5 w-5" />,
       color: 'bg-violet-500',
-      description: 'Creating intuitive interfaces and engaging visuals that align with your brand.',
+      description: 'Criação de interfaces intuitivas e visuais envolventes alinhados com sua marca.',
       details: [
-        'Wireframing and prototyping',
-        'UI design and branding',
-        'UX optimization',
-        'Responsive layouts',
-        'Design system creation',
+        'Wireframing e prototipagem',
+        'Design de UI e identidade visual',
+        'Otimização de UX',
+        'Layouts responsivos',
+        'Criação de sistema de design',
       ],
-      technologies: ['Figma', 'Adobe XD', 'Sketch', 'Prototyping', 'User Testing']
+      technologies: ['Figma', 'Adobe XD', 'Sketch', 'Prototipagem', 'Testes de Usuário']
     },
     {
       id: 'frontend',
       title: 'Frontend',
+      shortDesc: 'Construção visual do site',
       icon: <Code className="h-5 w-5" />,
       color: 'bg-indigo-500',
-      description: 'Building the visual aspects of your website with clean, efficient code.',
+      description: 'Construção dos aspectos visuais do seu site com código limpo e eficiente.',
       details: [
-        'HTML/CSS implementation',
-        'JavaScript functionality',
-        'Animation and transitions',
-        'Accessibility compliance',
-        'Cross-browser compatibility',
+        'Implementação de HTML/CSS',
+        'Funcionalidade JavaScript',
+        'Animações e transições',
+        'Conformidade de acessibilidade',
+        'Compatibilidade cross-browser',
       ],
       technologies: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Next.js', 'Tailwind CSS']
     },
     {
       id: 'backend',
       title: 'Backend',
+      shortDesc: 'Lógica e funcionalidades',
       icon: <Database className="h-5 w-5" />,
       color: 'bg-purple-500',
-      description: 'Developing the server-side logic that powers your website or application.',
+      description: 'Desenvolvimento da lógica do servidor que alimenta seu site ou aplicação.',
       details: [
-        'API development',
-        'Database architecture',
-        'Content management',
-        'User authentication',
-        'Server-side rendering',
+        'Desenvolvimento de API',
+        'Arquitetura de banco de dados',
+        'Gerenciamento de conteúdo',
+        'Autenticação de usuários',
+        'Renderização no servidor',
       ],
-      technologies: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'API Integration', 'Authentication']
+      technologies: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'Integração de API', 'Autenticação']
     },
     {
       id: 'responsive',
-      title: 'Responsive',
+      title: 'Responsivo',
+      shortDesc: 'Otimização para todos dispositivos',
       icon: <Smartphone className="h-5 w-5" />,
       color: 'bg-pink-500',
-      description: 'Ensuring your website works perfectly on all devices and screen sizes.',
+      description: 'Garantindo que seu site funcione perfeitamente em todos os dispositivos e tamanhos de tela.',
       details: [
-        'Mobile-first approach',
-        'Flexible layouts',
-        'Device testing',
-        'Performance optimization',
-        'Touch interface optimization',
+        'Abordagem mobile-first',
+        'Layouts flexíveis',
+        'Testes em dispositivos',
+        'Otimização de desempenho',
+        'Otimização de interface touch',
       ],
-      technologies: ['Media Queries', 'Flexible Grids', 'Device Testing', 'Mobile UX', 'Progressive Enhancement']
+      technologies: ['Media Queries', 'Grids Flexíveis', 'Testes em Dispositivos', 'UX Mobile', 'Enhancement Progressivo']
     },
     {
       id: 'deployment',
-      title: 'Deployment',
+      title: 'Implantação',
+      shortDesc: 'Lançamento e otimização',
       icon: <Rocket className="h-5 w-5" />,
       color: 'bg-orange-500',
-      description: 'Launching your site with proper testing and quality assurance.',
+      description: 'Lançamento do seu site com testes adequados e garantia de qualidade.',
       details: [
-        'CI/CD pipeline setup',
-        'Performance optimization',
-        'Security implementation',
-        'Analytics integration',
-        'SEO finalization',
+        'Configuração de pipeline CI/CD',
+        'Otimização de desempenho',
+        'Implementação de segurança',
+        'Integração de analytics',
+        'Finalização de SEO',
       ],
-      technologies: ['Vercel', 'AWS', 'Docker', 'CI/CD', 'Performance Testing', 'Monitoring']
+      technologies: ['Vercel', 'AWS', 'Docker', 'CI/CD', 'Testes de Desempenho', 'Monitoramento']
     }
   ];
 
-  // Code sample for each stage
+  // Exemplos de código para cada estágio
   const codeSamples = {
     discovery: {
-      filename: 'project-requirements.md',
+      filename: 'requisitos-projeto.md',
       language: 'markdown',
-      code: `# Project Requirements Document
+      code: `# Documento de Requisitos do Projeto
 
-## Client: Nave Mãe Web Solutions
+## Cliente: Nave Mãe Soluções Web
 
-### Project Goals:
-- Create a modern, responsive website
-- Improve conversion rates by 25%
-- Enhance SEO performance
-- Implement user-friendly CMS
+### Objetivos do Projeto:
+- Criar um site moderno e responsivo
+- Melhorar taxas de conversão em 25%
+- Aprimorar desempenho de SEO
+- Implementar CMS amigável
 
-### Target Audience:
-- Small to medium businesses
-- Technology startups
-- E-commerce businesses
+### Público-Alvo:
+- Pequenas e médias empresas
+- Startups de tecnologia
+- Negócios de e-commerce
 
-### Technical Requirements:
-- Mobile-first responsive design
-- Page load time < 2 seconds
-- SEO optimized architecture
-- Integration with analytics
-- Secure contact forms
-
-### Success Metrics:
-- Improved Google PageSpeed score > 90
-- Increased organic traffic by 30%
-- 25% higher conversion rate
-- Reduced bounce rate to below 40%`
+### Requisitos Técnicos:
+- Design responsivo mobile-first
+- Tempo de carregamento < 2 segundos
+- Arquitetura otimizada para SEO
+- Integração com analytics
+- Formulários de contato seguros`
     },
     design: {
-      filename: 'design-system.css',
+      filename: 'sistema-design.css',
       language: 'css',
       code: `:root {
-  /* Color Palette */
+  /* Paleta de Cores */
   --primary: #0f172a;
   --primary-light: #1e293b;
   --accent: #3b82f6;
@@ -153,102 +156,75 @@ const DevelopmentJourney = () => {
   --background: #ffffff;
   --background-alt: #f8fafc;
   
-  /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Tipografia */
+  --font-sans: 'Inter', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
   
-  /* Spacing */
+  /* Espaçamento */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
   --space-8: 2rem;
-  --space-16: 4rem;
   
-  /* Border Radius */
+  /* Raio de Borda */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
   
-  /* Shadows */
+  /* Sombras */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
   --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-}
-
-/* Base Components */
-.button {
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-family: var(--font-sans);
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.button-primary {
-  background-color: var(--accent);
-  color: white;
-  border: none;
-}
-
-.button-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }`
     },
     frontend: {
-      filename: 'HeroSection.jsx',
+      filename: 'SecaoHero.jsx',
       language: 'jsx',
       code: `import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-export function HeroSection() {
+export function SecaoHero() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
-      {/* Animated background elements */}
+    <section className="relative py-8 md:py-16">
+      {/* Elementos de fundo animados */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.8 }}
           transition={{ duration: 1.5 }}
-          className="absolute top-0 -left-4 w-72 h-72 bg-primary/30 rounded-full mix-blend-multiply filter blur-3xl"
+          className="absolute top-0 -left-4 w-32 md:w-72 
+                    h-32 md:h-72 bg-primary/30 rounded-full 
+                    mix-blend-multiply filter blur-3xl"
         />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.8 }}
           transition={{ duration: 1.5, delay: 0.2 }}
-          className="absolute -top-4 -right-4 w-72 h-72 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl"
+          className="absolute -top-4 -right-4 w-32 md:w-72 
+                    h-32 md:h-72 bg-blue-500/20 rounded-full 
+                    mix-blend-multiply filter blur-3xl"
         />
       </div>
 
-      <div className="container mx-auto px-4 max-w-5xl text-center">
+      <div className="container px-4 text-center">
         <motion.h1 
-          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl mb-6"
+          className="text-2xl md:text-4xl font-semibold mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          Sua solução completa para a <span className="text-primary">web.</span>
+          Sua solução para a <span className="text-primary">web</span>
         </motion.h1>
         
-        <motion.p 
-          className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          Desenvolvimento web profissional para construir, escalar e 
-          otimizar sua presença online.
-        </motion.p>
-
         <motion.div
-          className="mt-10 flex flex-wrap justify-center gap-4"
+          className="mt-6 flex justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
         >
-          <button className="px-6 py-3 bg-primary text-white rounded-md flex items-center">
+          <button className="px-4 py-2 bg-primary text-white 
+                          rounded-md flex items-center text-sm">
             Iniciar Projeto
             <ArrowRight className="ml-2 h-4 w-4" />
           </button>
@@ -261,43 +237,32 @@ export function HeroSection() {
     backend: {
       filename: 'api.js',
       language: 'javascript',
-      code: `// Contact form API endpoint
+      code: `// Endpoint de API para formulário de contato
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
 const contactSchema = require('../models/Contact');
 
-// Create reusable transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.MAIL_HOST,
-  port: process.env.MAIL_PORT,
-  secure: true,
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
-
 // POST /api/contact
 router.post(
   '/contact',
   [
-    // Validate input fields
+    // Validar campos de entrada
     body('name').notEmpty().withMessage('Nome é obrigatório'),
     body('email').isEmail().withMessage('Email inválido'),
     body('message').notEmpty().withMessage('Mensagem é obrigatória'),
     body('phone').optional(),
   ],
   async (req, res) => {
-    // Check for validation errors
+    // Verificar erros de validação
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
     try {
-      // Save contact to database
+      // Salvar contato no banco de dados
       const contact = new contactSchema({
         name: req.body.name,
         email: req.body.email,
@@ -306,13 +271,12 @@ router.post(
       });
       await contact.save();
 
-      // Send email notification
+      // Enviar notificação por email
       await transporter.sendMail({
         from: process.env.MAIL_FROM,
         to: process.env.MAIL_TO,
-        subject: 'Nova mensagem de contato - Website',
-        text: \`
-          Nome: \${req.body.name}
+        subject: 'Nova mensagem de contato',
+        text: \`Nome: \${req.body.name}
           Email: \${req.body.email}
           Telefone: \${req.body.phone || 'Não informado'}
           
@@ -323,18 +287,16 @@ router.post(
 
       res.status(200).json({ success: true });
     } catch (error) {
-      console.error('Contact form error:', error);
-      res.status(500).json({ error: 'Erro ao processar solicitação' });
+      console.error('Erro no formulário:', error);
+      res.status(500).json({ error: 'Erro ao processar' });
     }
   }
-);
-
-module.exports = router;`
+);`
     },
     responsive: {
-      filename: 'responsive.css',
+      filename: 'responsivo.css',
       language: 'css',
-      code: `/* Base styles (mobile first) */
+      code: `/* Base (mobile first) */
 .container {
   width: 100%;
   padding-right: 1rem;
@@ -351,46 +313,14 @@ module.exports = router;`
 }
 
 .nav-menu {
-  display: none; /* Hidden on mobile */
+  display: none; /* Oculto em mobile */
 }
 
 .mobile-menu-button {
   display: block;
 }
 
-.hero-section {
-  padding: 3rem 0;
-  text-align: center;
-}
-
-.hero-title {
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-/* Small tablets (640px and up) */
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-  
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Tablets (768px and up) */
+/* Tablets (768px e acima) */
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
@@ -406,29 +336,6 @@ module.exports = router;`
   
   .hero-section {
     padding: 4rem 0;
-  }
-  
-  .hero-title {
-    font-size: 3rem;
-  }
-}
-
-/* Laptops (1024px and up) */
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-  
-  .hero-section {
-    padding: 5rem 0;
-  }
-  
-  .hero-title {
-    font-size: 3.5rem;
-  }
-  
-  .services-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }`
     },
@@ -457,135 +364,109 @@ module.exports = router;`
         "cache-control": "public, max-age=31536000, immutable"
       },
       "continue": true
-    },
-    {
-      "src": "/(.*)",
-      "headers": {
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "DENY",
-        "X-XSS-Protection": "1; mode=block",
-        "Referrer-Policy": "strict-origin-when-cross-origin",
-        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.vercel-insights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com;"
-      },
-      "continue": true
     }
   ],
   "env": {
     "NEXT_PUBLIC_SITE_URL": "meusite.com.br"
-  },
-  "github": {
-    "silent": true
   }
 }`
     }
   };
 
-  // Preview content for each stage
+  // Conteúdo de preview para cada estágio - simplificado para mobile
   const stagePreview = {
     discovery: (
-      <div className="space-y-4">
-        <div className="border rounded p-3 bg-background">
-          <h4 className="text-sm font-medium mb-2">Client Interview Notes</h4>
+      <div className="space-y-3">
+        <div className="border rounded p-2 bg-background">
+          <h4 className="text-xs font-medium mb-1">Notas da Entrevista</h4>
           <ul className="text-xs space-y-1 text-muted-foreground">
-            <li>• Need modernized website with improved mobile experience</li>
-            <li>• Current conversion rate is below industry average</li>
-            <li>• Want to improve SEO rankings and organic traffic</li>
-            <li>• Need integration with their CRM system</li>
+            <li>• Website modernizado com experiência mobile</li>
+            <li>• Melhorar rankings SEO e tráfego orgânico</li>
+            <li>• Integração com CRM</li>
           </ul>
         </div>
-        <div className="border rounded p-3 bg-background">
-          <h4 className="text-sm font-medium mb-2">Competitor Analysis</h4>
+        <div className="border rounded p-2 bg-background">
+          <h4 className="text-xs font-medium mb-1">Análise Competitiva</h4>
           <div className="grid grid-cols-2 gap-2">
-            <div className="p-2 border rounded bg-muted/30 text-center text-xs">
+            <div className="p-1 border rounded bg-muted/30 text-center text-xs">
               <div className="w-full aspect-video bg-muted mb-1 rounded"></div>
-              Competitor A
+              Concorrente A
             </div>
-            <div className="p-2 border rounded bg-muted/30 text-center text-xs">
+            <div className="p-1 border rounded bg-muted/30 text-center text-xs">
               <div className="w-full aspect-video bg-muted mb-1 rounded"></div>
-              Competitor B
+              Concorrente B
             </div>
           </div>
         </div>
       </div>
     ),
     design: (
-      <div className="space-y-4">
-        <div className="border p-3 rounded-md border-dashed">
-          <div className="flex justify-between items-center p-2 border-b border-dashed mb-2">
-            <div className="w-16 h-4 bg-muted rounded"></div>
-            <div className="flex gap-2">
-              <div className="w-8 h-3 bg-muted rounded"></div>
-              <div className="w-8 h-3 bg-muted rounded"></div>
-              <div className="w-8 h-3 bg-muted rounded"></div>
+      <div className="space-y-3">
+        <div className="border p-2 rounded-md border-dashed">
+          <div className="flex justify-between items-center p-1 border-b border-dashed mb-1">
+            <div className="w-12 h-3 bg-muted rounded"></div>
+            <div className="flex gap-1">
+              <div className="w-6 h-2 bg-muted rounded"></div>
+              <div className="w-6 h-2 bg-muted rounded"></div>
             </div>
           </div>
-          <div className="p-2 space-y-2">
-            <div className="w-3/4 h-6 bg-muted rounded mx-auto"></div>
-            <div className="w-1/2 h-4 bg-muted rounded mx-auto"></div>
-            <div className="w-1/4 h-8 bg-primary/20 rounded mx-auto"></div>
+          <div className="p-1 space-y-1">
+            <div className="w-3/4 h-5 bg-muted rounded mx-auto"></div>
+            <div className="w-1/2 h-3 bg-muted rounded mx-auto"></div>
+            <div className="w-1/4 h-6 bg-primary/20 rounded mx-auto"></div>
           </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           <div className="flex-1 aspect-square rounded-md bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center text-blue-500 border font-medium text-xs">
-            Primary
+            Primária
           </div>
           <div className="flex-1 aspect-square rounded-md bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center text-indigo-500 border font-medium text-xs">
-            Secondary
+            Sec.
           </div>
           <div className="flex-1 aspect-square rounded-md bg-gradient-to-br from-neutral-100 to-neutral-50 flex items-center justify-center text-neutral-500 border font-medium text-xs">
-            Neutral
+            Neutra
           </div>
         </div>
       </div>
     ),
     frontend: (
       <div className="border rounded-md overflow-hidden">
-        <div className="flex items-center justify-between p-3 border-b bg-background">
-          <div className="font-medium text-sm">Nave Mãe</div>
-          <div className="flex gap-4">
+        <div className="flex items-center justify-between p-2 border-b bg-background">
+          <div className="font-medium text-xs">Nave Mãe</div>
+          <div className="flex gap-3">
             <div className="text-xs text-muted-foreground">Serviços</div>
-            <div className="text-xs text-muted-foreground">Sobre</div>
             <div className="text-xs text-muted-foreground">Contato</div>
           </div>
         </div>
-        <div className="p-4 text-center bg-gradient-to-b from-background to-muted/30">
-          <h3 className="text-lg font-medium mb-2">Sua solução completa para a web</h3>
-          <p className="text-xs text-muted-foreground mb-3">Desenvolvimento web profissional para sua presença online</p>
-          <button className="px-3 py-1.5 bg-primary text-white rounded-md text-xs">Iniciar Projeto</button>
+        <div className="p-3 text-center bg-gradient-to-b from-background to-muted/30">
+          <h3 className="text-sm font-medium mb-1">Sua solução web</h3>
+          <p className="text-xs text-muted-foreground mb-2">Desenvolvimento profissional</p>
+          <button className="px-2 py-1 bg-primary text-white rounded-md text-xs">Iniciar Projeto</button>
         </div>
       </div>
     ),
     backend: (
-      <div className="space-y-3">
+      <div className="space-y-2">
         <div className="border rounded-md overflow-hidden">
-          <div className="bg-muted p-2 border-b text-xs font-medium">API Endpoints</div>
-          <div className="p-3 text-xs">
-            <div className="flex items-center justify-between mb-2">
+          <div className="bg-muted p-1.5 border-b text-xs font-medium">API Endpoints</div>
+          <div className="p-2 text-xs">
+            <div className="flex items-center justify-between mb-1">
               <div className="flex items-center">
-                <span className="px-2 py-0.5 bg-green-100 text-green-700 rounded mr-2">GET</span>
-                <span>/api/services</span>
+                <span className="px-1.5 py-0.5 bg-green-100 text-green-700 rounded mr-1 text-[10px]">GET</span>
+                <span className="text-[10px]">/api/services</span>
               </div>
-              <span className="text-muted-foreground">List all services</span>
             </div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-1">
               <div className="flex items-center">
-                <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded mr-2">POST</span>
-                <span>/api/contact</span>
+                <span className="px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded mr-1 text-[10px]">POST</span>
+                <span className="text-[10px]">/api/contact</span>
               </div>
-              <span className="text-muted-foreground">Submit contact form</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <span className="px-2 py-0.5 bg-purple-100 text-purple-700 rounded mr-2">GET</span>
-                <span>/api/projects/:id</span>
-              </div>
-              <span className="text-muted-foreground">Get project details</span>
             </div>
           </div>
         </div>
-        <div className="border rounded-md overflow-hidden p-2">
-          <div className="w-full h-24 bg-muted/50 rounded flex items-center justify-center">
-            <div className="text-xs text-muted-foreground">Database Schema</div>
+        <div className="border rounded-md overflow-hidden p-1.5">
+          <div className="w-full h-20 bg-muted/50 rounded flex items-center justify-center">
+            <div className="text-xs text-muted-foreground">DB Schema</div>
           </div>
         </div>
       </div>
@@ -593,39 +474,39 @@ module.exports = router;`
     responsive: (
       <div className="flex justify-center">
         <motion.div 
-          className="border rounded-md overflow-hidden flex flex-col max-w-[150px] bg-background"
-          initial={{ width: "90%" }}
-          animate={{ width: ["90%", "150px", "90%", "300px", "150px"] }}
+          className="border rounded-md overflow-hidden flex flex-col max-w-[100px] bg-background"
+          initial={{ width: "70%" }}
+          animate={{ width: ["70%", "100px", "70%", "150px", "100px"] }}
           transition={{ duration: 8, repeat: Infinity, repeatType: "loop", ease: "easeInOut" }}
         >
-          <div className="h-8 bg-muted/30 border-b flex items-center justify-between px-2">
-            <div className="w-16 h-3 bg-muted rounded"></div>
-            <div className="w-3 h-3 bg-muted rounded"></div>
+          <div className="h-6 bg-muted/30 border-b flex items-center justify-between px-1.5">
+            <div className="w-10 h-2 bg-muted rounded"></div>
+            <div className="w-2 h-2 bg-muted rounded"></div>
           </div>
-          <div className="p-2 text-center">
-            <div className="w-full h-4 bg-muted rounded mb-2 mx-auto"></div>
-            <div className="w-3/4 h-3 bg-muted rounded mb-2 mx-auto"></div>
-            <div className="w-1/2 h-6 bg-primary/30 rounded mx-auto"></div>
+          <div className="p-1.5 text-center">
+            <div className="w-full h-3 bg-muted rounded mb-1 mx-auto"></div>
+            <div className="w-3/4 h-2 bg-muted rounded mb-1 mx-auto"></div>
+            <div className="w-1/2 h-4 bg-primary/30 rounded mx-auto"></div>
           </div>
         </motion.div>
       </div>
     ),
     deployment: (
-      <div className="space-y-3">
+      <div className="space-y-2">
         <div className="border rounded-md overflow-hidden">
-          <div className="bg-muted p-2 border-b text-xs font-medium flex items-center">
+          <div className="bg-muted p-1.5 border-b text-xs font-medium flex items-center">
             <Server className="h-3 w-3 mr-1" />
-            <span>Deployment Status</span>
+            <span>Status</span>
           </div>
-          <div className="p-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs">Production</span>
+          <div className="p-2">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xs">Produção</span>
               <div className="flex items-center text-xs text-green-500">
-                <span className="h-2 w-2 bg-green-500 rounded-full mr-1"></span>
-                <span>Live</span>
+                <span className="h-1.5 w-1.5 bg-green-500 rounded-full mr-1"></span>
+                <span>Online</span>
               </div>
             </div>
-            <div className="w-full h-1 bg-muted mb-3 rounded-full overflow-hidden">
+            <div className="w-full h-1 bg-muted mb-2 rounded-full overflow-hidden">
               <motion.div 
                 className="h-full bg-green-500 rounded-full" 
                 initial={{ width: "0%" }}
@@ -633,60 +514,86 @@ module.exports = router;`
                 transition={{ duration: 2 }}
               />
             </div>
-            <div className="text-xs flex items-center gap-1 text-muted-foreground">
-              <Globe className="h-3 w-3" />
+            <div className="text-[10px] flex items-center gap-1 text-muted-foreground">
+              <Globe className="h-2 w-2" />
               <span>navemae.com</span>
             </div>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <div className="border rounded-md p-2">
-            <div className="text-xs font-medium mb-1">Page Speed</div>
-            <div className="text-lg font-medium">98<span className="text-xs text-muted-foreground">/100</span></div>
+          <div className="border rounded-md p-1.5">
+            <div className="text-[10px] font-medium mb-0.5">Page Speed</div>
+            <div className="text-sm font-medium">98<span className="text-[10px] text-muted-foreground">/100</span></div>
           </div>
-          <div className="border rounded-md p-2">
-            <div className="text-xs font-medium mb-1">SEO Score</div>
-            <div className="text-lg font-medium">95<span className="text-xs text-muted-foreground">/100</span></div>
+          <div className="border rounded-md p-1.5">
+            <div className="text-[10px] font-medium mb-0.5">SEO</div>
+            <div className="text-sm font-medium">95<span className="text-[10px] text-muted-foreground">/100</span></div>
           </div>
         </div>
       </div>
     )
   };
 
-  // Handle node click
+  // Processar clique no nó
   const handleNodeClick = (id) => {
     setActiveNode(id);
     if (expandedNode !== id) {
       setExpandedNode(id);
     }
+    // Esconder a dica depois que o usuário clicar em qualquer etapa
+    setShowTip(false);
   };
 
   const handleShowCodeToggle = () => {
     setShowCode(!showCode);
   };
 
-  // Setup progress animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Auto-advance through nodes (optional)
-    }, 5000);
+  // Função para obter o próximo nó na jornada
+  const getNextNode = (currentNodeId) => {
+    const currentIndex = journeyNodes.findIndex(node => node.id === currentNodeId);
+    if (currentIndex < journeyNodes.length - 1) {
+      return journeyNodes[currentIndex + 1].id;
+    }
+    return null;
+  };
 
-    return () => clearInterval(interval);
-  }, []);
+  // Navegar para o próximo nó
+  const goToNextNode = () => {
+    const nextNodeId = getNextNode(activeNode);
+    if (nextNodeId) {
+      setActiveNode(nextNodeId);
+      setExpandedNode(nextNodeId);
+    }
+  };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-medium mb-4">Jornada de Desenvolvimento</h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          Explore nosso processo de desenvolvimento da concepção ao lançamento, 
-          vendo como transformamos ideias em sites de alto desempenho.
+    <div className="w-full max-w-6xl mx-auto px-3 sm:px-4 py-8 sm:py-16">
+      <div className="text-center mb-8 sm:mb-12">
+        <h2 className="text-2xl sm:text-3xl font-medium mb-3 sm:mb-4">Jornada de Desenvolvimento</h2>
+        <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+          Explore nosso processo de desenvolvimento da concepção ao lançamento.
         </p>
       </div>
 
-      {/* Journey Map Visualization */}
-      <div className="border rounded-lg mb-8 p-4 lg:p-8 bg-muted/20">
-        <div className="relative flex flex-col lg:flex-row items-center justify-between gap-4 mb-8">
+      {/* Visualização do Mapa de Jornada */}
+      <div className="border rounded-lg mb-6 sm:mb-8 p-3 sm:p-6 bg-muted/20">
+        {/* Dica para usuários - mostra apenas inicialmente */}
+        {showTip && (
+          <motion.div 
+            className="mb-4 sm:mb-6 bg-primary/10 p-2 sm:p-3 rounded-lg flex items-start gap-2 text-xs sm:text-sm"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Info className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+            <div>
+              <p><strong>Dica:</strong> Toque nas etapas para explorar cada fase do nosso processo.</p>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Layout para desktop - horizontal */}
+        <div className="hidden md:relative md:flex md:flex-row md:items-center md:justify-between md:gap-4 md:mb-8">
           {journeyNodes.map((node, index) => (
             <React.Fragment key={node.id}>
               <motion.div 
@@ -694,7 +601,7 @@ module.exports = router;`
                 whileHover={{ scale: 1.1 }}
                 onClick={() => handleNodeClick(node.id)}
               >
-                <div className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer
+                <div className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-colors
                    ${activeNode === node.id ? 'bg-white shadow-lg' : 'bg-white/80'}`}>
                   <div className={`p-2 rounded-full ${node.color.replace('bg-', 'text-')}`}>
                     {node.icon}
@@ -704,7 +611,7 @@ module.exports = router;`
               </motion.div>
               
               {index < journeyNodes.length - 1 && (
-                <div className="flex-1 hidden lg:block">
+                <div className="flex-1">
                   <div className="h-0.5 bg-muted relative">
                     {activeNode === node.id && (
                       <motion.div 
@@ -717,35 +624,57 @@ module.exports = router;`
                   </div>
                 </div>
               )}
-              
-              {index < journeyNodes.length - 1 && (
-                <div className="lg:hidden">
-                  <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                </div>
-              )}
             </React.Fragment>
           ))}
         </div>
 
-        {/* Detail Panels */}
+        {/* Layout para mobile - vertical */}
+        <div className="md:hidden space-y-2 mb-6">
+          {journeyNodes.map((node, index) => (
+            <motion.div 
+              key={node.id}
+              className={`border rounded-lg overflow-hidden transition-colors
+                ${activeNode === node.id ? 'border-primary/50 bg-white/80 shadow-sm' : 'border-muted bg-white/50'}`}
+              onClick={() => handleNodeClick(node.id)}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="flex items-center p-3 cursor-pointer">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${node.color}`}>
+                  {React.cloneElement(node.icon, { className: "h-5 w-5 text-white" })}
+                </div>
+                <div className="flex-1">
+                  <div className="font-medium">{node.title}</div>
+                  <div className="text-xs text-muted-foreground">{node.shortDesc}</div>
+                </div>
+                {activeNode === node.id && (
+                  <div className="ml-2 text-primary">
+                    <ChevronDown className="h-5 w-5" />
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Paineis de Detalhes */}
         <AnimatedPanel isOpen={expandedNode !== null}>
           {expandedNode && (
-            <div className="bg-background border rounded-lg p-4 overflow-hidden">
+            <div className="bg-background border rounded-lg p-3 sm:p-4 overflow-hidden">
               <div className="flex items-center gap-3 mb-4">
                 <div className={`p-2 rounded-full ${journeyNodes.find(n => n.id === expandedNode)?.color}`}>
                   {journeyNodes.find(n => n.id === expandedNode)?.icon}
                 </div>
                 <div>
                   <h3 className="font-medium">{journeyNodes.find(n => n.id === expandedNode)?.title}</h3>
-                  <p className="text-sm text-muted-foreground">{journeyNodes.find(n => n.id === expandedNode)?.description}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">{journeyNodes.find(n => n.id === expandedNode)?.description}</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-                <div className="space-y-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-6">
+                <div className="space-y-3 sm:space-y-4">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-sm font-medium">O que fazemos nesta fase:</h4>
-                    <Button variant="outline" size="sm" onClick={handleShowCodeToggle}>
+                    <h4 className="text-xs sm:text-sm font-medium">O que fazemos nesta fase:</h4>
+                    <Button variant="outline" size="sm" className="h-8 text-xs" onClick={handleShowCodeToggle}>
                       {showCode ? 'Ver Exemplos' : 'Ver Código'}
                     </Button>
                   </div>
@@ -764,18 +693,18 @@ module.exports = router;`
                             <div className="p-1 rounded-full bg-primary/10 mt-0.5">
                               <ChevronRight className="h-3 w-3 text-primary" />
                             </div>
-                            <span className="text-sm">{detail}</span>
+                            <span className="text-xs sm:text-sm">{detail}</span>
                           </motion.li>
                         ))}
                       </ul>
 
-                      <div className="pt-4">
-                        <h4 className="text-sm font-medium mb-3">Tecnologias utilizadas:</h4>
-                        <div className="flex flex-wrap gap-2">
+                      <div className="pt-3 sm:pt-4">
+                        <h4 className="text-xs sm:text-sm font-medium mb-2 sm:mb-3">Tecnologias utilizadas:</h4>
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
                           {journeyNodes.find(n => n.id === expandedNode)?.technologies.map((tech, i) => (
                             <motion.div
                               key={i}
-                              className="px-2 py-1 rounded-full text-xs bg-muted"
+                              className="px-2 py-1 rounded-full text-[10px] sm:text-xs bg-muted"
                               initial={{ opacity: 0, scale: 0.9 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ delay: i * 0.1 }}
@@ -787,14 +716,14 @@ module.exports = router;`
                       </div>
                     </>
                   ) : (
-                    <Card className="bg-black text-green-400 font-mono text-xs p-3 h-[300px] overflow-hidden">
-                      <div className="flex items-center gap-2 mb-2 text-xs text-white/70">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                        <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                    <Card className="bg-black text-green-400 font-mono text-[10px] sm:text-xs p-2 sm:p-3 h-[220px] sm:h-[300px] overflow-hidden">
+                      <div className="flex items-center gap-1 sm:gap-2 mb-2 text-[10px] sm:text-xs text-white/70">
+                        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500"></div>
+                        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-500"></div>
+                        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-500"></div>
                         <span>{codeSamples[expandedNode]?.filename}</span>
                       </div>
-                      <div className="overflow-auto h-[calc(100%-24px)]">
+                      <div className="overflow-auto h-[calc(100%-20px)]">
                         <pre className="whitespace-pre-wrap">{codeSamples[expandedNode]?.code}</pre>
                       </div>
                     </Card>
@@ -802,24 +731,24 @@ module.exports = router;`
                 </div>
 
                 <div>
-                  <Tabs defaultValue="preview">
-                    <TabsList className="mb-4">
-                      <TabsTrigger value="preview">Visualização</TabsTrigger>
-                      <TabsTrigger value="results">Resultados</TabsTrigger>
+                  <Tabs defaultValue="preview" className="w-full">
+                    <TabsList className="mb-3 w-full h-9">
+                      <TabsTrigger value="preview" className="text-xs">Visualização</TabsTrigger>
+                      <TabsTrigger value="results" className="text-xs">Resultados</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="preview" className="mt-0">
                       <Card className="overflow-hidden border bg-background">
                         <CardContent className="p-0">
-                          <div className="bg-muted/30 text-xs px-4 py-2 border-b flex items-center justify-between">
+                          <div className="bg-muted/30 text-[10px] sm:text-xs px-3 py-1.5 border-b flex items-center justify-between">
                             <span>Preview</span>
-                            <div className="flex items-center gap-2">
-                              <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                              <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                            <div className="flex items-center gap-1 sm:gap-2">
+                              <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500"></div>
+                              <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-500"></div>
+                              <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-green-500"></div>
                             </div>
                           </div>
-                          <div className="h-[280px] p-4 overflow-hidden flex items-center justify-center">
+                          <div className="h-[180px] sm:h-[280px] p-3 overflow-hidden flex items-center justify-center">
                             <motion.div
                               className="h-full w-full"
                               initial={{ opacity: 0 }}
@@ -834,16 +763,16 @@ module.exports = router;`
                     </TabsContent>
                     
                     <TabsContent value="results" className="mt-0">
-                      <Card className="overflow-hidden border bg-muted/20 h-[336px]">
-                        <CardContent className="p-4">
-                          <h4 className="text-sm font-medium mb-4">Métricas de Sucesso:</h4>
+                      <Card className="overflow-hidden border bg-muted/20 h-[230px] sm:h-[336px]">
+                        <CardContent className="p-3 sm:p-4">
+                          <h4 className="text-xs sm:text-sm font-medium mb-3 sm:mb-4">Métricas de Sucesso:</h4>
                           
                           {expandedNode === 'discovery' && (
-                            <div className="space-y-4">
-                              <div className="space-y-2">
+                            <div className="space-y-3 sm:space-y-4">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Definição de Requisitos</span>
-                                  <span className="text-sm font-medium">100%</span>
+                                  <span className="text-xs">Definição de Requisitos</span>
+                                  <span className="text-xs font-medium">100%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -855,10 +784,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Análise Competitiva</span>
-                                  <span className="text-sm font-medium">85%</span>
+                                  <span className="text-xs">Análise Competitiva</span>
+                                  <span className="text-xs font-medium">85%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -870,10 +799,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Pesquisa de Audiência</span>
-                                  <span className="text-sm font-medium">90%</span>
+                                  <span className="text-xs">Pesquisa de Audiência</span>
+                                  <span className="text-xs font-medium">90%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -888,11 +817,11 @@ module.exports = router;`
                           )}
                           
                           {expandedNode === 'design' && (
-                            <div className="space-y-4">
-                              <div className="space-y-2">
+                            <div className="space-y-3 sm:space-y-4">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Fidelidade ao Briefing</span>
-                                  <span className="text-sm font-medium">95%</span>
+                                  <span className="text-xs">Fidelidade ao Briefing</span>
+                                  <span className="text-xs font-medium">95%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -904,10 +833,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Consistência Visual</span>
-                                  <span className="text-sm font-medium">100%</span>
+                                  <span className="text-xs">Consistência Visual</span>
+                                  <span className="text-xs font-medium">100%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -919,10 +848,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Usabilidade</span>
-                                  <span className="text-sm font-medium">90%</span>
+                                  <span className="text-xs">Usabilidade</span>
+                                  <span className="text-xs font-medium">90%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -937,11 +866,11 @@ module.exports = router;`
                           )}
                           
                           {expandedNode === 'frontend' && (
-                            <div className="space-y-4">
-                              <div className="space-y-2">
+                            <div className="space-y-3 sm:space-y-4">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Fidelidade ao Design</span>
-                                  <span className="text-sm font-medium">98%</span>
+                                  <span className="text-xs">Fidelidade ao Design</span>
+                                  <span className="text-xs font-medium">98%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -953,10 +882,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Qualidade do Código</span>
-                                  <span className="text-sm font-medium">95%</span>
+                                  <span className="text-xs">Qualidade do Código</span>
+                                  <span className="text-xs font-medium">95%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -968,10 +897,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Acessibilidade</span>
-                                  <span className="text-sm font-medium">92%</span>
+                                  <span className="text-xs">Acessibilidade</span>
+                                  <span className="text-xs font-medium">92%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -986,11 +915,11 @@ module.exports = router;`
                           )}
                           
                           {expandedNode === 'backend' && (
-                            <div className="space-y-4">
-                              <div className="space-y-2">
+                            <div className="space-y-3 sm:space-y-4">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Desempenho</span>
-                                  <span className="text-sm font-medium">96%</span>
+                                  <span className="text-xs">Desempenho</span>
+                                  <span className="text-xs font-medium">96%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1002,10 +931,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Segurança</span>
-                                  <span className="text-sm font-medium">100%</span>
+                                  <span className="text-xs">Segurança</span>
+                                  <span className="text-xs font-medium">100%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1017,10 +946,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Escalabilidade</span>
-                                  <span className="text-sm font-medium">94%</span>
+                                  <span className="text-xs">Escalabilidade</span>
+                                  <span className="text-xs font-medium">94%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1035,11 +964,11 @@ module.exports = router;`
                           )}
                           
                           {expandedNode === 'responsive' && (
-                            <div className="space-y-4">
-                              <div className="space-y-2">
+                            <div className="space-y-3 sm:space-y-4">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Mobile</span>
-                                  <span className="text-sm font-medium">100%</span>
+                                  <span className="text-xs">Mobile</span>
+                                  <span className="text-xs font-medium">100%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1051,10 +980,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Tablet</span>
-                                  <span className="text-sm font-medium">98%</span>
+                                  <span className="text-xs">Tablet</span>
+                                  <span className="text-xs font-medium">98%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1066,10 +995,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Desktop</span>
-                                  <span className="text-sm font-medium">100%</span>
+                                  <span className="text-xs">Desktop</span>
+                                  <span className="text-xs font-medium">100%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1084,11 +1013,11 @@ module.exports = router;`
                           )}
                           
                           {expandedNode === 'deployment' && (
-                            <div className="space-y-4">
-                              <div className="space-y-2">
+                            <div className="space-y-3 sm:space-y-4">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Velocidade</span>
-                                  <span className="text-sm font-medium">98/100</span>
+                                  <span className="text-xs">Velocidade</span>
+                                  <span className="text-xs font-medium">98/100</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1100,10 +1029,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">SEO</span>
-                                  <span className="text-sm font-medium">95/100</span>
+                                  <span className="text-xs">SEO</span>
+                                  <span className="text-xs font-medium">95/100</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1115,10 +1044,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Acessibilidade</span>
-                                  <span className="text-sm font-medium">92/100</span>
+                                  <span className="text-xs">Acessibilidade</span>
+                                  <span className="text-xs font-medium">92/100</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1130,10 +1059,10 @@ module.exports = router;`
                                 </div>
                               </div>
                               
-                              <div className="space-y-2">
+                              <div className="space-y-1 sm:space-y-2">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm">Boas Práticas</span>
-                                  <span className="text-sm font-medium">98/100</span>
+                                  <span className="text-xs">Boas Práticas</span>
+                                  <span className="text-xs font-medium">98/100</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-muted overflow-hidden rounded-full">
                                   <motion.div 
@@ -1152,6 +1081,24 @@ module.exports = router;`
                   </Tabs>
                 </div>
               </div>
+              
+              {/* Botão de navegação para próxima etapa - visible apenas em mobile */}
+              {getNextNode(expandedNode) && (
+                <motion.div 
+                  className="mt-4 w-full"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <Button 
+                    onClick={goToNextNode} 
+                    className="w-full justify-between text-xs sm:text-sm bg-primary/10 hover:bg-primary/20 text-primary"
+                  >
+                    <span>Próxima etapa: {journeyNodes.find(n => n.id === getNextNode(expandedNode))?.title}</span>
+                    <ChevronsRight className="h-4 w-4 ml-1" />
+                  </Button>
+                </motion.div>
+              )}
             </div>
           )}
         </AnimatedPanel>
@@ -1160,7 +1107,7 @@ module.exports = router;`
   );
 };
 
-// Helper component for animated panels
+// Componente auxiliar para painéis animados
 const AnimatedPanel = ({ children, isOpen }) => {
   return (
     <motion.div
