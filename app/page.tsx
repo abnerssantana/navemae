@@ -1,97 +1,83 @@
 "use client"
-
-import { useEffect, useState } from "react"
-import Link from "next/link"
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import {
-  Code,
-  Compass,
-  Construction,
-  Layers,
-  Rocket,
-  Smartphone,
-  Search,
-  Zap,
-  BarChart3,
+  Globe,
+  ChevronRight,
   ArrowRight,
   Menu,
   X,
-  ChevronRight
-} from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import {
-  HeroWrapper,
-  FadeUp,
-  StaggerChildren,
-  FadeIn,
-} from "@/components/motion"
-import { ServiceCard } from "@/components/service-card"
+  ExternalLink,
+  Zap,
+  Code,
+  Search,
+  Rocket
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export default function Home() {
-  const [loaded, setLoaded] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  
-  useEffect(() => {
-    setLoaded(true)
-    
-    // Add overflow hidden to body when mobile menu is open
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [mobileMenuOpen])
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Logo que será ajustado conforme modo claro/escuro
+  const logoSrc = isDarkMode ? "/logo.png" : "/logo-white.png";
 
   const services = [
     {
-      icon: <Rocket className="h-5 w-5" />,
-      title: "Sites Dinâmicos",
-      description: "Websites dinâmicos e responsivos com experiências interativas e alto desempenho."
-    },
-    {
-      icon: <Smartphone className="h-5 w-5" />,
-      title: "Landing Pages",
-      description: "Páginas otimizadas para conversão que transformam visitantes em clientes."
-    },
-    {
       icon: <Code className="h-5 w-5" />,
-      title: "WordPress Customizado",
-      description: "Sites WordPress com temas e plugins personalizados para suas necessidades específicas."
+      title: "Sites Interestelares",
+      description: "Websites responsivos com experiências interativas de outro planeta."
+    },
+    {
+      icon: <Rocket className="h-5 w-5" />,
+      title: "Landing Pages",
+      description: "Páginas de conversão que atraem visitantes como um raio trator."
     },
     {
       icon: <Search className="h-5 w-5" />,
-      title: "Otimização SEO",
-      description: "Melhore seu ranking nos mecanismos de busca com otimização técnica e de conteúdo."
+      title: "SEO Avançado",
+      description: "Estratégias para deixar seu site visível em toda a galáxia digital."
     },
     {
       icon: <Zap className="h-5 w-5" />,
-      title: "Melhoria de Performance",
-      description: "Otimização de velocidade para melhorar a experiência do usuário e conversões."
+      title: "Performance Cósmica",
+      description: "Velocidade de dobra espacial para melhorar a experiência do usuário."
+    }
+  ];
+
+  const projects = [
+    {
+      title: "Portal Dimensional",
+      category: "Desenvolvimento Web",
+      description: "Redesign completo com interface que parece de outro mundo"
     },
     {
-      icon: <Layers className="h-5 w-5" />,
-      title: "Aplicações Web",
-      description: "Aplicações web personalizadas com integração de API e funcionalidades avançadas."
+      title: "E-commerce Galáctico",
+      category: "Loja Virtual",
+      description: "Plataforma de vendas com tecnologia que transcende o ordinário"
+    },
+    {
+      title: "App Educacional Orbital",
+      category: "Aplicação Web",
+      description: "Sistema de aprendizado que expande horizontes como o universo"
     }
-  ]
+  ];
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {/* Mobile-optimized header */}
-      <motion.header
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-      >
-        <div className="container px-4 mx-auto flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2 z-20">
-            <Compass className="h-5 w-5 text-primary" />
-            <span className="font-medium">Nave Mãe</span>
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      {/* Header simplificado */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+          <Link href="/" className="flex items-center gap-2">
+            <Image 
+              src={logoSrc} 
+              alt="Nave Mãe Logo" 
+              width={110} 
+              height={30} 
+              className="h-8 w-auto"
+            />
           </Link>
           
           {/* Desktop Navigation */}
@@ -99,378 +85,370 @@ export default function Home() {
             <Link href="#servicos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Serviços
             </Link>
+            <Link href="#projetos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Projetos
+            </Link>
             <Link href="#sobre" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Sobre
-            </Link>
-            <Link href="#portfolio" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Portfólio
             </Link>
             <Link href="#contato" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Contato
             </Link>
           </nav>
           
-          {/* Desktop CTA Button */}
+          {/* CTA Button */}
           <div className="hidden md:block">
-            <Button asChild>
+            <Button asChild size="sm" className="bg-primary/90 hover:bg-primary">
               <Link href="/contato">
-                <span>Contato</span>
-                <ArrowRight className="ml-2 h-4 w-4" />
+                Iniciar Missão
               </Link>
             </Button>
           </div>
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-foreground z-20"
+            className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" />
             )}
           </button>
           
-          {/* Mobile Menu */}
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div 
-                className="mobile-menu md:hidden"
-                initial={{ opacity: 0, x: "100%" }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              >
-                <div className="mt-16 flex flex-col space-y-8">
-                  <Link 
-                    href="#servicos" 
-                    className="flex items-center justify-between py-3 border-b text-foreground"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="text-lg font-medium">Serviços</span>
-                    <ChevronRight className="h-5 w-5 text-primary" />
+          {/* Mobile Menu Overlay */}
+          {mobileMenuOpen && (
+            <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm md:hidden">
+              <div className="container h-full flex flex-col pt-20 px-4">
+                <nav className="flex flex-col gap-6 text-lg">
+                  <Link href="#servicos" onClick={() => setMobileMenuOpen(false)}>
+                    Serviços
                   </Link>
-                  <Link 
-                    href="#sobre" 
-                    className="flex items-center justify-between py-3 border-b text-foreground"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="text-lg font-medium">Sobre</span>
-                    <ChevronRight className="h-5 w-5 text-primary" />
+                  <Link href="#projetos" onClick={() => setMobileMenuOpen(false)}>
+                    Projetos
                   </Link>
-                  <Link 
-                    href="#portfolio" 
-                    className="flex items-center justify-between py-3 border-b text-foreground"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="text-lg font-medium">Portfólio</span>
-                    <ChevronRight className="h-5 w-5 text-primary" />
+                  <Link href="#sobre" onClick={() => setMobileMenuOpen(false)}>
+                    Sobre
                   </Link>
-                  <Link 
-                    href="#contato" 
-                    className="flex items-center justify-between py-3 border-b text-foreground"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="text-lg font-medium">Contato</span>
-                    <ChevronRight className="h-5 w-5 text-primary" />
+                  <Link href="#contato" onClick={() => setMobileMenuOpen(false)}>
+                    Contato
                   </Link>
-
-                  <div className="pt-4">
-                    <Button className="w-full" asChild>
-                      <Link 
-                        href="/contato"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        <span>Entre em Contato</span>
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </div>
+                </nav>
+                <div className="mt-8">
+                  <Button className="w-full bg-primary/90 hover:bg-primary" asChild>
+                    <Link href="/contato">
+                      Iniciar Missão
+                    </Link>
+                  </Button>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              </div>
+            </div>
+          )}
         </div>
-      </motion.header>
+      </header>
 
       <main className="flex-1">
-        <HeroWrapper>
-          <section className="relative py-16 md:py-24 overflow-hidden">
-            {/* Alien green gradient background */}
-            <div className="absolute inset-0 -z-10 overflow-hidden">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.8 }}
-                transition={{ duration: 1.5 }}
-                className="absolute top-0 -left-4 w-64 h-64 bg-primary/30 rounded-full mix-blend-multiply filter blur-3xl alien-pulse"
-              />
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.7 }}
-                transition={{ duration: 1.5, delay: 0.2 }}
-                className="absolute -top-4 right-0 w-64 h-64 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl"
-              />
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
-                transition={{ duration: 1.5, delay: 0.4 }}
-                className="absolute bottom-0 left-20 w-64 h-64 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl"
-              />
-            </div>
-
-            <div className="container px-4 mx-auto text-center">
-              <FadeIn delay={0.2}>
-                <motion.div
-                  className="inline-flex items-center gap-2 px-3 py-1 text-sm rounded-full border mb-6 bg-muted/30"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <Construction className="h-4 w-4 text-primary" />
-                  <span>Desenvolvimento Web Profissional</span>
-                </motion.div>
-              </FadeIn>
-
-              <FadeUp delay={0.4}>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-4">
-                  Sua solução completa para a{" "}
-                  <span className="relative inline-block">
-                    <span className="text-primary">web.</span>
-                    <motion.span
-                      className="absolute -bottom-1 left-0 h-1 bg-primary"
-                      initial={{ width: 0 }}
-                      animate={{ width: "100%" }}
-                      transition={{ delay: 1, duration: 0.8 }}
-                    />
-                  </span>
-                </h1>
-              </FadeUp>
-
-              <FadeUp delay={0.6}>
-                <p className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-muted-foreground">
-                  Desenvolvimento web profissional para construir, escalar e otimizar sua presença online. Especialistas em sites dinâmicos, WordPress e SEO.
-                </p>
-              </FadeUp>
-
-              <motion.div
-                className="mt-8 flex flex-col sm:flex-row justify-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-              >
-                <motion.div 
-                  className="w-full sm:w-auto" 
-                  whileHover={{ scale: 1.03 }} 
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <Button size="lg" className="h-12 px-6 relative overflow-hidden w-full sm:w-auto">
-                    <span className="relative z-10">Iniciar Projeto</span>
-                    <motion.span
-                      className="absolute inset-0 bg-primary opacity-50"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                  </Button>
-                </motion.div>
-
-                <motion.div 
-                  className="w-full sm:w-auto" 
-                  whileHover={{ scale: 1.03 }} 
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <Button size="lg" variant="outline" className="h-12 px-6 w-full sm:w-auto">
-                    Ver Nosso Trabalho
-                  </Button>
-                </motion.div>
-              </motion.div>
-            </div>
-          </section>
-        </HeroWrapper>
-       
-        <section id="servicos" className="py-16 md:py-24 bg-muted/30">
-          <div className="container px-4 mx-auto">
-            <FadeUp>
-              <div className="mb-12 text-center">
-                <h2 className="text-2xl sm:text-3xl font-medium mb-4">Nossos Serviços</h2>
-                <p className="max-w-xl mx-auto text-muted-foreground">
-                  Soluções personalizadas focadas em desempenho, design e resultados para sua presença digital.
-                </p>
-              </div>
-            </FadeUp>
-
-            <StaggerChildren staggerDelay={0.1}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {services.map((service, index) => (
-                  <motion.div
-                    key={index}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 }
-                    }}
-                    whileHover={{
-                      scale: 1.02,
-                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)"
-                    }}
-                  >
-                    <ServiceCard
-                      icon={service.icon}
-                      title={service.title}
-                      description={service.description}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </StaggerChildren>
+        {/* Hero Section - Com tema alienígena */}
+        <section className="relative border-b">
+          <div className="container mx-auto px-4 py-20 md:py-32 flex flex-col items-center text-center">
+            <motion.div
+              className="inline-flex items-center gap-2 px-3 py-1 text-sm rounded-full border border-primary/30 mb-6 bg-primary/5"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Globe className="h-4 w-4 text-primary" />
+              <span>Tecnologia de outro planeta</span>
+            </motion.div>
+            
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Decolando sua presença{" "}
+              <span className="text-primary relative">
+                digital
+                <span className="absolute bottom-1 left-0 h-1 w-full bg-primary/30"></span>
+              </span>
+            </motion.h1>
+            
+            <motion.p 
+              className="max-w-xl text-lg text-muted-foreground mb-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              Desenvolvimento web com padrões extraterrestres para construir, escalar e 
+              otimizar sua presença online além de qualquer expectativa terrestre.
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <Button size="lg" className="bg-primary/90 hover:bg-primary" asChild>
+                <Link href="/contato">
+                  <span>Iniciar Missão</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link href="#projetos">
+                  Ver Nossas Expedições
+                </Link>
+              </Button>
+            </motion.div>
+          </div>
+          
+          {/* Background com tema espacial suave */}
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <div className="absolute top-0 right-0 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-blue-500/5 rounded-full mix-blend-multiply filter blur-3xl"></div>
           </div>
         </section>
 
-        <section id="portfolio" className="py-16 md:py-24 bg-muted/30">
-          <div className="container px-4 mx-auto">
-            <FadeUp>
-              <div className="mb-12 text-center">
-                <h2 className="text-2xl sm:text-3xl font-medium mb-4">Projetos Recentes</h2>
-                <p className="max-w-xl mx-auto text-muted-foreground">
-                  Confira alguns de nossos trabalhos mais recentes e veja como podemos transformar sua presença online.
-                </p>
-              </div>
-            </FadeUp>
+        {/* Services Grid - Com tema espacial */}
+        <section id="servicos" className="py-20 bg-muted/5">
+          <div className="container mx-auto px-4">
+            <div className="max-w-xl mx-auto text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-medium mb-4">Nossas Tecnologias</h2>
+              <p className="text-muted-foreground">
+                Soluções que parecem de outro mundo, mas são perfeitamente adaptadas para sua realidade.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((item) => (
-                <FadeUp key={item} delay={0.2 * item}>
-                  <motion.div
-                    className="relative overflow-hidden rounded-lg aspect-video bg-muted"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {/* Green overlay accent */}
-                    <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
-                    
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
-                      <h3 className="text-white font-medium">Projeto {item}</h3>
-                      <p className="text-white/80 text-sm">Desenvolvimento Web</p>
-                      <div className="mt-3">
-                        <motion.div 
-                          className="inline-flex items-center text-sm text-primary"
-                          whileHover={{ x: 5 }}
-                        >
-                          <span>Ver detalhes</span>
-                          <ChevronRight className="h-4 w-4 ml-1" />
-                        </motion.div>
-                      </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {services.map((service, index) => (
+                <motion.div 
+                  key={index}
+                  className="bg-background p-6 rounded-lg border border-border/30 hover:border-primary/40 transition-colors group"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-md bg-primary/10 text-primary">
+                      {service.icon}
                     </div>
-                  </motion.div>
-                </FadeUp>
+                    <h3 className="font-medium">{service.title}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{service.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Clean visual demo section - Com tema espacial */}
+        <section className="py-20 border-t border-b">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              <div className="w-full md:w-1/2 order-2 md:order-1">
+                <motion.div 
+                  className="bg-black rounded-lg overflow-hidden shadow-lg"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
+                >
+                  <div className="p-4 border-b border-gray-800">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      <span className="text-xs text-gray-400 ml-2">alien-styles.css</span>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <pre className="text-xs md:text-sm text-green-400 font-mono">
+                      <div>/* Estilos interplanetários */</div>
+                      <div>.cosmic-header {'{'}</div>
+                      <div>  display: flex;</div>
+                      <div>  align-items: center;</div>
+                      <div>  justify-content: space-between;</div>
+                      <div>  backdrop-filter: blur(8px);</div>
+                      <div>{'}'}</div>
+                      <div></div>
+                      <div>.alien-gradient {'{'}</div>
+                      <div>  background: linear-gradient(</div>
+                      <div>    to right,</div>
+                      <div>    rgba(var(--alien-green), 0.2),</div>
+                      <div>    transparent,</div>
+                      <div>    rgba(var(--alien-blue), 0.1)</div>
+                      <div>  );</div>
+                      <div>{'}'}</div>
+                      <div></div>
+                      <div>.warp-button {'{'}</div>
+                      <div>  background: var(--alien-green);</div>
+                      <div>  color: var(--space-black);</div>
+                      <div>  border: none;</div>
+                      <div>  border-radius: 0.25rem;</div>
+                      <div>{'}'}</div>
+                    </pre>
+                  </div>
+                </motion.div>
+              </div>
+              
+              <div className="w-full md:w-1/2 order-1 md:order-2">
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
+                >
+                  <h2 className="text-2xl md:text-3xl font-medium mb-4">Tecnologia<br />de outra dimensão</h2>
+                  <p className="text-muted-foreground mb-6">
+                    Utilizamos as mais avançadas tecnologias da galáxia web para criar sites que transcendem
+                    as expectativas terrenas em velocidade, segurança e experiência do usuário.
+                  </p>
+                  <ul className="space-y-3">
+                    {[
+                      "Framework Next.js para velocidade intergaláctica",
+                      "Design responsivo para dispositivos de todos os planetas",
+                      "Otimização Core Web Vitals que desafia a física",
+                      "Código limpo que parece criado por inteligências superiores"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <ChevronRight className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Recent Projects - Com tema espacial */}
+        <section id="projetos" className="py-20 bg-muted/5">
+          <div className="container mx-auto px-4">
+            <div className="max-w-xl mx-auto text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-medium mb-4">Nossas Expedições</h2>
+              <p className="text-muted-foreground">
+                Explore nossos projetos recentes e descubra como nossa tecnologia alienígena 
+                transformou a presença digital de nossos clientes.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {projects.map((project, index) => (
+                <motion.div 
+                  key={index}
+                  className="bg-background border border-border/30 rounded-lg overflow-hidden group hover:border-primary/40 transition-all"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                >
+                  <div className="h-48 bg-muted/50 flex items-center justify-center relative">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-primary/50"></div>
+                    <span className="text-muted-foreground text-sm">Visualização do Projeto</span>
+                  </div>
+                  <div className="p-6">
+                    <div className="text-sm text-primary mb-2">{project.category}</div>
+                    <h3 className="font-medium mb-2">{project.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+                    <Link href="#" className="text-sm inline-flex items-center text-primary group-hover:underline">
+                      Ver detalhes da missão
+                      <ExternalLink className="ml-1 h-3 w-3" />
+                    </Link>
+                  </div>
+                </motion.div>
               ))}
             </div>
 
-            <div className="mt-10 text-center">
-              <Button variant="outline">Ver Todos os Projetos</Button>
+            <div className="mt-12 text-center">
+              <Button variant="outline" asChild>
+                <Link href="/portfolio">Explorar todo o universo de projetos</Link>
+              </Button>
             </div>
           </div>
         </section>
 
-        <section id="contato" className="py-16 md:py-24 bg-primary/5">
-          <div className="container px-4 mx-auto">
-            <div className="max-w-xl mx-auto text-center">
-              <FadeUp>
-                <h2 className="text-2xl sm:text-3xl font-medium mb-4">Pronto para começar?</h2>
-                <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-                  Vamos trabalhar juntos para criar um site que represente perfeitamente sua marca e ajude você a alcançar
-                  seus objetivos de negócio.
-                </p>
-              </FadeUp>
-
-              <FadeUp delay={0.2}>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full"
-                >
-                  <Button size="lg" className="h-12 px-8 w-full sm:w-auto">
-                    Entre em Contato
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </motion.div>
-              </FadeUp>
+        {/* CTA Section - Com tema espacial */}
+        <section id="contato" className="py-20 bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-2xl md:text-3xl font-medium mb-4">Pronto para decolar?</h2>
+              <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+                Entre em contato para uma comunicação interplanetária e descubra como nossa tecnologia 
+                alienígena pode transformar suas ideias em realidade digital.
+              </p>
+              <Button size="lg" className="bg-primary/90 hover:bg-primary" asChild>
+                <Link href="/contato">
+                  <span>Estabelecer Contato</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
       </main>
 
-      <motion.footer
-        className="border-t py-12 bg-muted/10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        <div className="container px-4 mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-            <div className="col-span-2 sm:col-span-1">
+      {/* Footer simplificado - Com tema espacial */}
+      <footer className="border-t py-12 bg-muted/5">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <Compass className="h-5 w-5 text-primary" />
-                <span className="font-medium">Nave Mãe</span>
+                <Image 
+                  src={logoSrc} 
+                  alt="Nave Mãe Logo" 
+                  width={110}
+                  height={30}
+                  className="h-8 w-auto"
+                />
               </div>
               <p className="text-sm text-muted-foreground max-w-xs">
-                Desenvolvimento web profissional com foco em performance, design e resultados.
+                Desenvolvimento web intergaláctico com tecnologia que transcende as expectativas humanas.
               </p>
             </div>
 
             <div>
               <h3 className="font-medium mb-4">Serviços</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Sites Dinâmicos
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Landing Pages
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    WordPress
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    SEO
-                  </Link>
-                </li>
+                {[
+                  ["Sites Interestelares", "#"],
+                  ["Landing Pages", "#"],
+                  ["WordPress Orbital", "#"],
+                  ["SEO Cósmico", "#"]
+                ].map(([label, url], i) => (
+                  <li key={i}>
+                    <Link href={url} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div>
-              <h3 className="font-medium mb-4">Empresa</h3>
+              <h3 className="font-medium mb-4">Base Espacial</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Sobre
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Portfólio
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Contato
-                  </Link>
-                </li>
+                {[
+                  ["Nossa História", "#sobre"],
+                  ["Expedições", "#projetos"],
+                  ["Canal de Contato", "#contato"]
+                ].map(([label, url], i) => (
+                  <li key={i}>
+                    <Link href={url} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div>
-              <h3 className="font-medium mb-4">Contato</h3>
+              <h3 className="font-medium mb-4">Comunicação</h3>
               <ul className="space-y-2">
                 <li className="text-sm text-muted-foreground">contato@navemae.com</li>
                 <li className="text-sm text-muted-foreground">+55 (11) 9999-9999</li>
@@ -478,21 +456,21 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border-t mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center">
-            <div className="text-sm text-muted-foreground mb-4 sm:mb-0 text-center sm:text-left">
-              © {new Date().getFullYear()} Nave Mãe. Todos os direitos reservados.
+          <div className="border-t mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+            <div className="text-sm text-muted-foreground mb-4 md:mb-0">
+              © {new Date().getFullYear()} Nave Mãe. Todos os direitos reservados em toda a galáxia.
             </div>
             <div className="flex gap-4">
               <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Termos
+                Termos Interestelares
               </Link>
               <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Privacidade
+                Privacidade Cósmica
               </Link>
             </div>
           </div>
         </div>
-      </motion.footer>
+      </footer>
     </div>
-  )
+  );
 }
