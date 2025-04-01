@@ -1,5 +1,5 @@
-import type { ReactNode } from "react"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { type ReactNode } from "react"
+import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
 
 interface ServiceCardProps {
@@ -10,27 +10,27 @@ interface ServiceCardProps {
 
 export function ServiceCard({ icon, title, description }: ServiceCardProps) {
   return (
-    <Card className="border-0 shadow-none bg-background hover:bg-muted/30 transition-colors group overflow-hidden relative h-full">
-      {/* Green top accent line with animation */}
-      <motion.div 
-        className="absolute top-0 left-0 h-1 bg-primary"
-        initial={{ width: 0 }}
-        whileInView={{ width: "100%" }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      />
-      
-      <CardHeader className="pb-2 pt-6">
-        <div className="flex items-center gap-3">
-          <div className="text-primary bg-primary/10 p-2 rounded-md group-hover:bg-primary/20 transition-colors">
-            {icon}
+    <motion.div
+      className="h-full"
+      whileHover={{ y: -5 }}
+      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+    >
+      <Card className="h-full rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 bg-card overflow-hidden border border-border/40 hover:border-primary/20">
+        <div className="h-1 w-full bg-gradient-to-r from-primary to-primary/60"></div>
+        
+        <CardContent className="pt-6 pb-4 px-6">
+          <div className="flex flex-col gap-4">
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary/10 text-primary">
+              {icon}
+            </div>
+            
+            <div>
+              <h3 className="font-medium text-lg mb-2">{title}</h3>
+              <p className="text-muted-foreground">{description}</p>
+            </div>
           </div>
-          <h3 className="font-medium">{title}</h3>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground">{description}</p>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </motion.div>
   )
 }

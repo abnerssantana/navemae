@@ -6,11 +6,23 @@ import Image from "next/image"
 import { Menu, X, Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // After mounting, we can safely show the UI
   useEffect(() => {
@@ -29,42 +41,52 @@ export function Navbar() {
   }
 
   // Determine the logo source based on the current theme
-  const logoSrc = theme === "dark" ? "/logo.png" : "/logo-white.png"
+  const logoSrc = theme === "dark" ? "/logo-white.png" : "/logo.png"
 
   // Don't render anything until after hydration to avoid UI flicker
   if (!mounted) return null
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+    <header 
+      className={`sticky top-0 z-50 w-full backdrop-blur transition-all duration-300 ${
+        scrolled 
+          ? "bg-background/95 border-b shadow-sm" 
+          : "bg-background/50"
+      }`}
+    >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <Image 
-            src={logoSrc} 
-            alt="Nave Mãe Logo" 
-            width={110} 
-            height={30} 
-            className="h-8 w-auto"
-            onError={(e) => {
-              // Fallback if logo isn't available
-              e.currentTarget.src = "/placeholder.svg";
-            }}
-          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Image 
+              src={logoSrc} 
+              alt="Nave Mãe Logo" 
+              width={110} 
+              height={30} 
+              className="h-8 w-auto"
+              onError={(e) => {
+                // Fallback if logo isn't available
+                e.currentTarget.src = "/placeholder.svg";
+              }}
+            />
+          </motion.div>
         </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-8">
-          <Link href="#servicos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Serviços
-          </Link>
-          <Link href="#projetos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Projetos
-          </Link>
-          <Link href="#sobre" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Sobre
-          </Link>
-          <Link href="#contato" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Contato
-          </Link>
+          {["Serviços", "Projetos", "Sobre", "Contato"].map((item, i) => (
+            <Link 
+              key={item}
+              href={`#${item.toLowerCase()}`} 
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
+            >
+              {item}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+          ))}
         </nav>
         
         {/* Theme toggle and CTA Button */}
@@ -74,7 +96,7 @@ export function Navbar() {
             size="icon" 
             onClick={toggleTheme} 
             aria-label="Toggle theme"
-            className="h-8 w-8"
+            className="h-8 w-8 rounded-full"
           >
             {theme === "dark" ? (
               <Sun className="h-4 w-4" />
@@ -82,9 +104,9 @@ export function Navbar() {
               <Moon className="h-4 w-4" />
             )}
           </Button>
-          <Button asChild size="sm" className="bg-primary/90 hover:bg-primary">
+          <Button asChild size="sm" className="font-medium rounded-full px-5">
             <Link href="/contato">
-              Iniciar Missão
+              Iniciar Projeto
             </Link>
           </Button>
         </div>
@@ -96,7 +118,7 @@ export function Navbar() {
             size="icon" 
             onClick={toggleTheme} 
             aria-label="Toggle theme"
-            className="h-8 w-8"
+            className="h-8 w-8 rounded-full"
           >
             {theme === "dark" ? (
               <Sun className="h-4 w-4" />
@@ -108,7 +130,7 @@ export function Navbar() {
             variant="ghost"
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="h-8 w-8"
+            className="h-8 w-8 rounded-full"
           >
             {mobileMenuOpen ? (
               <X className="h-5 w-5" />
@@ -119,33 +141,50 @@ export function Navbar() {
         </div>
         
         {/* Mobile Menu Overlay */}
-        {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm md:hidden mt-16 h-screen">
-            <div className="container h-full flex flex-col pt-4 px-4">
-              <nav className="flex flex-col gap-6 text-lg">
-                <Link href="#servicos" onClick={() => setMobileMenuOpen(false)}>
-                  Serviços
-                </Link>
-                <Link href="#projetos" onClick={() => setMobileMenuOpen(false)}>
-                  Projetos
-                </Link>
-                <Link href="#sobre" onClick={() => setMobileMenuOpen(false)}>
-                  Sobre
-                </Link>
-                <Link href="#contato" onClick={() => setMobileMenuOpen(false)}>
-                  Contato
-                </Link>
-              </nav>
-              <div className="mt-8">
-                <Button className="w-full bg-primary/90 hover:bg-primary" asChild>
-                  <Link href="/contato" onClick={() => setMobileMenuOpen(false)}>
-                    Iniciar Missão
-                  </Link>
-                </Button>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              className="fixed inset-0 z-50 bg-background/98 backdrop-blur-sm md:hidden pt-16"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="container h-full flex flex-col pt-8 px-4">
+                <nav className="flex flex-col space-y-8 items-center text-lg">
+                  {["Serviços", "Projetos", "Sobre", "Contato"].map((item, i) => (
+                    <motion.div 
+                      key={item}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1, duration: 0.2 }}
+                    >
+                      <Link 
+                        href={`#${item.toLowerCase()}`} 
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="relative text-foreground hover:text-primary transition-colors"
+                      >
+                        {item}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+                <motion.div 
+                  className="mt-12 text-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.3 }}
+                >
+                  <Button className="rounded-full px-8 py-6 font-medium" asChild>
+                    <Link href="/contato" onClick={() => setMobileMenuOpen(false)}>
+                      Iniciar Projeto
+                    </Link>
+                  </Button>
+                </motion.div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   )
