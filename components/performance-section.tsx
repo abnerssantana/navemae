@@ -1,6 +1,7 @@
 "use client"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { motion } from "framer-motion"
 
 export function PerformanceSection() {
   return (
@@ -35,9 +36,20 @@ export function PerformanceSection() {
                 <span className="text-sm">First Contentful Paint</span>
                 <span className="text-sm font-medium">0.8s</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[85%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "85%" }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -45,9 +57,20 @@ export function PerformanceSection() {
                 <span className="text-sm">Largest Contentful Paint</span>
                 <span className="text-sm font-medium">1.2s</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[75%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "75%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -55,9 +78,20 @@ export function PerformanceSection() {
                 <span className="text-sm">Cumulative Layout Shift</span>
                 <span className="text-sm font-medium">0.02</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[95%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "95%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -65,12 +99,24 @@ export function PerformanceSection() {
                 <span className="text-sm">Time to Interactive</span>
                 <span className="text-sm font-medium">1.5s</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[70%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "70%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
           </div>
         </TabsContent>
+        
         <TabsContent value="seo" className="p-6 space-y-6 mt-0">
           <div className="space-y-4">
             <div className="space-y-2">
@@ -78,9 +124,20 @@ export function PerformanceSection() {
                 <span className="text-sm">SEO Score</span>
                 <span className="text-sm font-medium">92/100</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[92%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "92%" }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -88,9 +145,20 @@ export function PerformanceSection() {
                 <span className="text-sm">Mobile Friendliness</span>
                 <span className="text-sm font-medium">98/100</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[98%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "98%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -98,9 +166,20 @@ export function PerformanceSection() {
                 <span className="text-sm">Content Quality</span>
                 <span className="text-sm font-medium">88/100</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[88%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "88%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -108,12 +187,24 @@ export function PerformanceSection() {
                 <span className="text-sm">Backlink Profile</span>
                 <span className="text-sm font-medium">85/100</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[85%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "85%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
           </div>
         </TabsContent>
+        
         <TabsContent value="user" className="p-6 space-y-6 mt-0">
           <div className="space-y-4">
             <div className="space-y-2">
@@ -121,9 +212,20 @@ export function PerformanceSection() {
                 <span className="text-sm">Average Session Duration</span>
                 <span className="text-sm font-medium">2m 45s</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[80%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "80%" }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -131,9 +233,20 @@ export function PerformanceSection() {
                 <span className="text-sm">Pages Per Session</span>
                 <span className="text-sm font-medium">3.2</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[75%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "75%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -141,9 +254,20 @@ export function PerformanceSection() {
                 <span className="text-sm">Bounce Rate</span>
                 <span className="text-sm font-medium">32%</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[68%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "68%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
 
             <div className="space-y-2">
@@ -151,9 +275,20 @@ export function PerformanceSection() {
                 <span className="text-sm">Conversion Rate</span>
                 <span className="text-sm font-medium">4.8%</span>
               </div>
-              <div className="h-1 w-full bg-muted overflow-hidden rounded-full">
-                <div className="h-full bg-primary w-[65%] rounded-full"></div>
-              </div>
+              <motion.div 
+                className="h-1 w-full bg-muted overflow-hidden rounded-full"
+                initial={{ opacity: 0.6 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="h-full bg-primary rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "65%" }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+                  viewport={{ once: true }}
+                ></motion.div>
+              </motion.div>
             </div>
           </div>
         </TabsContent>
@@ -161,4 +296,3 @@ export function PerformanceSection() {
     </div>
   )
 }
-
