@@ -6,8 +6,6 @@ import {
   Globe,
   ChevronRight,
   ArrowRight,
-  Menu,
-  X,
   ExternalLink,
   Zap,
   Code,
@@ -16,13 +14,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Navbar } from "@/components/navbar";
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Logo que será ajustado conforme modo claro/escuro
-  const logoSrc = isDarkMode ? "/logo.png" : "/logo-white.png";
 
   const services = [
     {
@@ -67,86 +62,8 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      {/* Header simplificado */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <Image 
-              src={logoSrc} 
-              alt="Nave Mãe Logo" 
-              width={110} 
-              height={30} 
-              className="h-8 w-auto"
-            />
-          </Link>
-          
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-8">
-            <Link href="#servicos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Serviços
-            </Link>
-            <Link href="#projetos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Projetos
-            </Link>
-            <Link href="#sobre" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Sobre
-            </Link>
-            <Link href="#contato" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Contato
-            </Link>
-          </nav>
-          
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button asChild size="sm" className="bg-primary/90 hover:bg-primary">
-              <Link href="/contato">
-                Iniciar Missão
-              </Link>
-            </Button>
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
-          
-          {/* Mobile Menu Overlay */}
-          {mobileMenuOpen && (
-            <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm md:hidden">
-              <div className="container h-full flex flex-col pt-20 px-4">
-                <nav className="flex flex-col gap-6 text-lg">
-                  <Link href="#servicos" onClick={() => setMobileMenuOpen(false)}>
-                    Serviços
-                  </Link>
-                  <Link href="#projetos" onClick={() => setMobileMenuOpen(false)}>
-                    Projetos
-                  </Link>
-                  <Link href="#sobre" onClick={() => setMobileMenuOpen(false)}>
-                    Sobre
-                  </Link>
-                  <Link href="#contato" onClick={() => setMobileMenuOpen(false)}>
-                    Contato
-                  </Link>
-                </nav>
-                <div className="mt-8">
-                  <Button className="w-full bg-primary/90 hover:bg-primary" asChild>
-                    <Link href="/contato">
-                      Iniciar Missão
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </header>
+      {/* Using the new Navbar component */}
+      <Navbar isDarkMode={isDarkMode} />
 
       <main className="flex-1">
         {/* Hero Section - Com tema alienígena */}
@@ -213,7 +130,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Services Grid - Com tema espacial */}
+        {/* Services Grid */}
         <section id="servicos" className="py-20 bg-muted/5">
           <div className="container mx-auto px-4">
             <div className="max-w-xl mx-auto text-center mb-12">
@@ -246,7 +163,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Clean visual demo section - Com tema espacial */}
+        {/* Visual demo section */}
         <section className="py-20 border-t border-b">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center gap-12">
@@ -327,7 +244,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Recent Projects - Com tema espacial */}
+        {/* Recent Projects */}
         <section id="projetos" className="py-20 bg-muted/5">
           <div className="container mx-auto px-4">
             <div className="max-w-xl mx-auto text-center mb-12">
@@ -373,7 +290,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA Section - Com tema espacial */}
+        {/* CTA Section */}
         <section id="contato" className="py-20 bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
@@ -393,14 +310,14 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer simplificado - Com tema espacial */}
+      {/* Footer */}
       <footer className="border-t py-12 bg-muted/5">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <Image 
-                  src={logoSrc} 
+                  src={isDarkMode ? "/logo.png" : "/logo-white.png"} 
                   alt="Nave Mãe Logo" 
                   width={110}
                   height={30}
