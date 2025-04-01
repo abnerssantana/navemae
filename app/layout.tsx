@@ -1,10 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { GeistSans } from "geist/font/sans"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
 
 export const metadata: Metadata = {
   title: "Nave Mãe | Desenvolvimento Web Profissional",
@@ -18,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className="dark">
-      <body className={inter.className}>
+      <body className={GeistSans.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

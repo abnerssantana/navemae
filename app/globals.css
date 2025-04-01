@@ -83,6 +83,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.82 0.20 155);
+
+  /* Font variables for Geist */
+  --font-geist-sans: var(--GeistSans-font);
+  --font-geist-mono: var(--GeistMono-font, monospace);
 }
 
 .dark {
