@@ -16,7 +16,6 @@ import {
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { CssBuilder } from "@/components/css-builder"
 import {
   HeroWrapper,
   FadeUp,
@@ -25,7 +24,8 @@ import {
 } from "@/components/motion"
 import { ServiceCard } from "@/components/service-card"
 import { PerformanceSection } from "@/components/performance-section"
-import { WebBuildingProcess } from "@/components/web-building-process"
+import DevelopmentJourney from "@/components/development-journey"
+
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false)
@@ -194,37 +194,10 @@ export default function Home() {
           </section>
         </HeroWrapper>
         <section className="py-20 bg-muted/30">
-          <div className="container max-w-5xl mx-auto px-4">
-            <FadeUp>
-              <div className="flex items-center gap-4 mb-10">
-                <div className="h-1 bg-primary rounded-full flex-1 max-w-[100px]"></div>
-                <h2 className="text-2xl font-medium">Tecnologias & Processos</h2>
-              </div>
-            </FadeUp>
-
-            <FadeUp delay={0.2}>
-              <div className="space-y-2 mb-8">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium">Status do Projeto</span>
-                  <span className="text-sm font-medium">{buildProgress}%</span>
-                </div>
-                <div className="h-2 w-full bg-muted overflow-hidden rounded-full">
-                  <motion.div
-                    className="h-full bg-primary rounded-full"
-                    initial={{ width: "0%" }}
-                    animate={{ width: `${buildProgress}%` }}
-                    transition={{ duration: 0.5 }}
-                  ></motion.div>
-                </div>
-              </div>
-            </FadeUp>
-
-            <FadeUp delay={0.4}>
-              <CssBuilder />
-            </FadeUp>
+          <div className="container mx-auto px-4">
+            <DevelopmentJourney />
           </div>
         </section>
-
         <section id="servicos" className="py-24">
           <div className="container max-w-6xl mx-auto px-4">
             <FadeUp>
