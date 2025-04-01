@@ -193,8 +193,6 @@ export default function Home() {
             </div>
           </section>
         </HeroWrapper>
-
-        // Then in your page markup, replace this section:
         <section className="py-20 bg-muted/30">
           <div className="container max-w-5xl mx-auto px-4">
             <FadeUp>
