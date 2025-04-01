@@ -74,7 +74,7 @@ export function StaggerChildren({ children, staggerDelay = 0.1 }: {
 }
 
 // Child item for stagger animations
-export function StaggerItem() {
+export function StaggerItem({ children }: { children: ReactNode }) {
   const variants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
