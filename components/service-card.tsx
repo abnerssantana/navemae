@@ -15,9 +15,7 @@ export function ServiceCard({ icon, title, description }: ServiceCardProps) {
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
     >
-      <Card className="h-full rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 bg-card overflow-hidden border border-border/40 hover:border-primary/20">
-        <div className="h-1 w-full bg-gradient-to-r from-primary to-primary/60"></div>
-        
+      <Card className="h-full rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 bg-card overflow-hidden border border-primary/20 hover:border-primary/40">
         <CardContent className="pt-6 pb-4 px-6">
           <div className="flex flex-col gap-4">
             <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary/10 text-primary">

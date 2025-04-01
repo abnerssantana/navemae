@@ -11,7 +11,11 @@ import {
   Rocket,
   Zap,
   ExternalLink,
-  CheckCircle
+  CheckCircle,
+  ShoppingCart,
+  PaintBucket,
+  Database,
+  Smartphone
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
@@ -22,7 +26,7 @@ import { ServiceCard } from "@/components/service-card"
 export default function Home() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  
+
   // After mounting, we can safely access the theme
   useEffect(() => {
     setMounted(true)
@@ -51,6 +55,26 @@ export default function Home() {
       icon: <Zap className="h-5 w-5" />,
       title: "Otimização de Performance",
       description: "Velocidade é essencial. Garantimos que seu site carregue instantaneamente."
+    },
+    {
+      icon: <ShoppingCart className="h-5 w-5" />,
+      title: "E-commerce",
+      description: "Lojas virtuais completas com gestão de produtos, pagamentos e integrações."
+    },
+    {
+      icon: <PaintBucket className="h-5 w-5" />,
+      title: "UI/UX Design",
+      description: "Interfaces intuitivas e atraentes que proporcionam experiências memoráveis aos usuários."
+    },
+    {
+      icon: <Database className="h-5 w-5" />,
+      title: "Sistemas Web",
+      description: "Aplicações personalizadas para automatizar e otimizar processos do seu negócio."
+    },
+    {
+      icon: <Smartphone className="h-5 w-5" />,
+      title: "Otimização Mobile",
+      description: "Experiências mobile-first para atender à crescente base de usuários em dispositivos móveis."
     }
   ]
 
@@ -92,14 +116,14 @@ export default function Home() {
               <Globe className="h-3.5 w-3.5" />
               <span>Transformando ideias em realidade digital</span>
             </motion.div>
-            
-            <motion.h1 
+
+            <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              Desenvolvimento web 
+              Desenvolvimento web
               <span className="text-primary relative md:ml-2">
                 inovador
                 <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 385 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,18 +131,18 @@ export default function Home() {
                 </svg>
               </span>
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               className="max-w-xl text-lg text-muted-foreground mb-10"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              Criamos experiências digitais que combinam design intuitivo com tecnologia 
+              Criamos experiências digitais que combinam design intuitivo com tecnologia
               avançada para construir, escalar e otimizar sua presença online.
             </motion.p>
-            
-            <motion.div 
+
+            <motion.div
               className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -137,7 +161,7 @@ export default function Home() {
               </Button>
             </motion.div>
           </div>
-          
+
           {/* Background elements */}
           <div className="absolute inset-0 -z-10 overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
@@ -149,7 +173,7 @@ export default function Home() {
         <section id="serviços" className="section-padding bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-xl mx-auto text-center mb-16">
-              <motion.span 
+              <motion.span
                 className="text-primary font-medium mb-2 block"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -157,7 +181,7 @@ export default function Home() {
               >
                 NOSSOS SERVIÇOS
               </motion.span>
-              <motion.h2 
+              <motion.h2
                 className="text-3xl md:text-4xl font-medium mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -165,7 +189,7 @@ export default function Home() {
               >
                 Soluções digitais completas
               </motion.h2>
-              <motion.p 
+              <motion.p
                 className="text-muted-foreground"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -177,18 +201,36 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-              {services.map((service, index) => (
-                <motion.div 
+              {services.slice(0, 4).map((service, index) => (
+                <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <ServiceCard 
-                    icon={service.icon} 
-                    title={service.title} 
-                    description={service.description} 
+                  <ServiceCard
+                    icon={service.icon}
+                    title={service.title}
+                    description={service.description}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {services.slice(4).map((service, index) => (
+                <motion.div
+                  key={index + 4}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <ServiceCard
+                    icon={service.icon}
+                    title={service.title}
+                    description={service.description}
                   />
                 </motion.div>
               ))}
@@ -200,7 +242,7 @@ export default function Home() {
         <section className="section-padding border-t border-b bg-secondary/30">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row items-center gap-16">
-              <motion.div 
+              <motion.div
                 className="w-full lg:w-1/2 order-2 lg:order-1"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -238,8 +280,8 @@ export default function Home() {
                   </div>
                 </div>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 className="w-full lg:w-1/2 order-1 lg:order-2"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -247,9 +289,9 @@ export default function Home() {
                 transition={{ duration: 0.7 }}
               >
                 <span className="text-primary font-medium mb-2 block">TECNOLOGIA MODERNA</span>
-                <h2 className="text-3xl md:text-4xl font-medium mb-6">Código limpo,<br/>Resultados impactantes</h2>
+                <h2 className="text-3xl md:text-4xl font-medium mb-6">Código limpo,<br />Resultados impactantes</h2>
                 <p className="text-muted-foreground mb-8">
-                  Desenvolvemos com as tecnologias mais recentes para criar sites e aplicações 
+                  Desenvolvemos com as tecnologias mais recentes para criar sites e aplicações
                   que se destacam em velocidade, segurança e experiência do usuário.
                 </p>
                 <ul className="space-y-4">
@@ -259,8 +301,8 @@ export default function Home() {
                     "Otimização Core Web Vitals para melhor SEO",
                     "Código limpo e manutenível para evolução contínua"
                   ].map((item, i) => (
-                    <motion.li 
-                      key={i} 
+                    <motion.li
+                      key={i}
                       className="flex items-start gap-3"
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -281,7 +323,7 @@ export default function Home() {
         <section id="projetos" className="section-padding bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-xl mx-auto text-center mb-16">
-              <motion.span 
+              <motion.span
                 className="text-primary font-medium mb-2 block"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -289,7 +331,7 @@ export default function Home() {
               >
                 PORTFÓLIO
               </motion.span>
-              <motion.h2 
+              <motion.h2
                 className="text-3xl md:text-4xl font-medium mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -297,7 +339,7 @@ export default function Home() {
               >
                 Projetos selecionados
               </motion.h2>
-              <motion.p 
+              <motion.p
                 className="text-muted-foreground"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -310,7 +352,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {projects.map((project, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   className="bg-card border border-border/30 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 group hover-lift"
                   initial={{ opacity: 0, y: 20 }}
@@ -326,8 +368,8 @@ export default function Home() {
                     <div className="modern-badge bg-primary/10 text-primary mb-3">{project.category}</div>
                     <h3 className="font-medium text-xl mb-2">{project.title}</h3>
                     <p className="text-muted-foreground mb-4">{project.description}</p>
-                    <Link 
-                      href="#" 
+                    <Link
+                      href="#"
                       className="inline-flex items-center text-primary font-medium text-sm group-hover:underline"
                     >
                       Ver detalhes do projeto
@@ -350,7 +392,7 @@ export default function Home() {
         <section id="contato" className="section-padding bg-secondary/30 border-t">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
-              <motion.h2 
+              <motion.h2
                 className="text-3xl md:text-4xl font-medium mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -358,14 +400,14 @@ export default function Home() {
               >
                 Vamos criar algo incrível juntos
               </motion.h2>
-              <motion.p 
+              <motion.p
                 className="text-muted-foreground mb-8 max-w-lg mx-auto"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                Entre em contato para discutir seu projeto e descobrir como podemos transformar 
+                Entre em contato para discutir seu projeto e descobrir como podemos transformar
                 suas ideias em uma presença digital de sucesso.
               </motion.p>
               <motion.div
@@ -392,9 +434,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <Image 
-                  src={logoSrc} 
-                  alt="Nave Mãe Logo" 
+                <Image
+                  src={logoSrc}
+                  alt="Nave Mãe Logo"
                   width={110}
                   height={30}
                   className="h-8 w-auto"
@@ -405,7 +447,7 @@ export default function Home() {
                 />
               </div>
               <p className="text-muted-foreground max-w-xs">
-                Desenvolvimento web profissional com foco em resultados. 
+                Desenvolvimento web profissional com foco em resultados.
                 Transformando sua visão em uma presença digital impactante.
               </p>
             </div>
@@ -420,8 +462,8 @@ export default function Home() {
                   ["SEO", "#"]
                 ].map(([label, url], i) => (
                   <li key={i}>
-                    <Link 
-                      href={url} 
+                    <Link
+                      href={url}
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       {label}
