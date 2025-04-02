@@ -107,18 +107,6 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative border-b section-padding">
-        <div
-className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64"
-  >
-    <Image
-      src="/ovni.svg"
-      alt="OVNI"
-      width={256}
-      height={256}
-      className="object-contain"
-      priority
-    />
-  </div>
           <div className="container mx-auto px-4 py-16 md:py-28 flex flex-col items-center text-cente z-10">
             <motion.div
               className="modern-badge bg-primary/10 text-primary border border-primary/20 mb-6"
