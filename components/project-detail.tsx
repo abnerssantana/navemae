@@ -1,4 +1,3 @@
-// components/project-detail.tsx
 "use client"
 
 import { motion } from "framer-motion"
@@ -6,9 +5,9 @@ import { FadeUp, FadeIn, StaggerChildren, StaggerItem } from "@/components/motio
 import { ArrowUpRight, Calendar, User, Tag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ProjectFrontmatter } from "@/lib/mdx"
+import { Project } from "@/lib/projects"
 
-export function ProjectHeader({ project }: { project: ProjectFrontmatter }) {
+export function ProjectHeader({ project }: { project: Project }) {
   return (
     <div className="py-16 md:py-24">
       <FadeUp>
@@ -96,7 +95,7 @@ export function ProjectCallToAction() {
   )
 }
 
-export function RelatedProjects({ projects }: { projects: ProjectFrontmatter[] }) {
+export function RelatedProjects({ projects }: { projects: Project[] }) {
   return (
     <div className="py-16 border-t border-border">
       <StaggerChildren>

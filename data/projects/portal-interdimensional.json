@@ -1,0 +1,41 @@
+{
+  "title": "Portal Interdimensional",
+  "description": "Redesign completo com interface que transcende o espaço-tempo.",
+  "client": "Corporação Nebulosa",
+  "date": "2025-03-15",
+  "category": "Desenvolvimento Web",
+  "services": ["Design UI/UX", "Desenvolvimento Frontend", "SEO"],
+  "image": "/images/projects/portal-interdimensional.jpg",
+  "images": [
+    "/images/projects/portal-interdimensional-1.jpg",
+    "/images/projects/portal-interdimensional-2.jpg"
+  ],
+  "content": {
+    "sections": [
+      {
+        "type": "text",
+        "content": "O Portal Interdimensional é uma plataforma digital desenvolvida para a Corporação Nebulosa, uma empresa inovadora no setor de tecnologias avançadas. O projeto envolveu um redesign completo da plataforma, com foco em uma interface que transcende as expectativas convencionais de usabilidade."
+      },
+      {
+        "type": "text",
+        "content": "Nosso objetivo foi criar uma experiência digital que se adaptasse perfeitamente a qualquer dispositivo, proporcionando navegação intuitiva e rápida acesso às informações essenciais."
+      },
+      {
+        "type": "image",
+        "content": "/images/projects/portal-interdimensional-detail.jpg"
+      },
+      {
+        "type": "text",
+        "content": "Utilizamos tecnologias de ponta como React, Next.js e Framer Motion para criar animações fluidas e transições que elevam a experiência do usuário a um novo patamar. O resultado é um portal que não apenas atende às necessidades funcionais, mas também causa uma impressão memorável em todos os visitantes."
+      },
+      {
+        "type": "quote",
+        "content": "A Nave Mãe conseguiu transformar nossa visão em realidade digital. O novo portal não apenas melhorou nossos indicadores de conversão em 300%, mas também estabeleceu um novo padrão para experiências digitais em nosso setor."
+      },
+      {
+        "type": "text",
+        "content": "O projeto também incluiu otimização SEO completa, garantindo que o portal seja facilmente encontrado pelos motores de busca intergalácticos, expandindo o alcance da Corporação Nebulosa para novos horizontes digitais."
+      }
+    ]
+  }
+}
