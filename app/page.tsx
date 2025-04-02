@@ -107,7 +107,19 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative border-b section-padding">
-          <div className="container mx-auto px-4 py-16 md:py-28 flex flex-col items-center text-center">
+        <div
+className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64"
+  >
+    <Image
+      src="/ovni.svg"
+      alt="OVNI"
+      width={256}
+      height={256}
+      className="object-contain"
+      priority
+    />
+  </div>
+          <div className="container mx-auto px-4 py-16 md:py-28 flex flex-col items-center text-cente z-10">
             <motion.div
               className="modern-badge bg-primary/10 text-primary border border-primary/20 mb-6"
               initial={{ opacity: 0, y: -10 }}
@@ -160,28 +172,6 @@ export default function Home() {
                   Ver Portfólio
                 </Link>
               </Button>
-            </motion.div>
-          </div>
-
-          {/* Background elements */}
-          <div className="absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
-
-            {/* Imagem do OVNI no canto direito */}
-            <motion.div
-              className="absolute right-20 top-1/2 transform -translate-y-1/2 w-64 h-64"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 0.8, x: 0 }}
-              transition={{ delay: 0.6, duration: 1 }}
-            >
-              <Image
-                src="/ovni.svg"
-                alt="OVNI"
-                width={256}
-                height={256}
-                className="object-contain"
-              />
             </motion.div>
           </div>
         </section>
