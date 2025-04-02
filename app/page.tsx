@@ -85,30 +85,30 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Fullscreen menu overlay */}
       {menuOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 bg-background/95 backdrop-blur-md flex flex-col items-center justify-center"
         >
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             className="absolute top-6 right-6 p-2"
             onClick={() => setMenuOpen(false)}
           >
             <span className="h-0.5 w-6 bg-foreground rotate-45 absolute"></span>
             <span className="h-0.5 w-6 bg-foreground -rotate-45 absolute"></span>
           </Button>
-          
+
           <nav className="flex flex-col items-center space-y-8">
-            {["BASE TERRESTRE", "SERVIÇOS ESTELARES", "MISSÕES", "TRIPULAÇÃO", "COMUNICAÇÃO"].map((item) => (
+            {["BASE TERRESTRE", "SERVIÇOS ESTELARES", "MISSÕES", "CONTATO"].map((item) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * ["BASE TERRESTRE", "SERVIÇOS ESTELARES", "MISSÕES", "TRIPULAÇÃO", "COMUNICAÇÃO"].indexOf(item) }}
+                transition={{ delay: 0.1 * ["BASE TERRESTRE", "SERVIÇOS ESTELARES", "MISSÕES", "CONTATO"].indexOf(item) }}
               >
-                <Link 
+                <Link
                   href={`#${item.toLowerCase()}`}
                   className="text-4xl font-light tracking-tight hover:text-primary transition-colors"
                   onClick={() => setMenuOpen(false)}
@@ -128,16 +128,15 @@ export default function Home() {
           <div className="h-2 w-2 rounded-full bg-accent"></div>
         </div>
         <div className="flex items-center space-x-6">
-          <button 
+          <button
             className="text-sm transition-colors hover:text-primary"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
             {theme === 'dark' ? 'MODO SOL' : 'MODO ECLIPSE'}
           </button>
           <Link href="/contato" className="text-sm hover:text-primary transition-colors">
-            TRANSMISSÃO
-          </Link>
-          <button 
+            CONTATO          </Link>
+          <button
             className="flex flex-col space-y-1"
             onClick={() => setMenuOpen(true)}
           >
@@ -161,12 +160,12 @@ export default function Home() {
                   DIGITAL.
                 </h1>
               </FadeUp>
-              
+
               <div className="mt-24 flex flex-col md:flex-row justify-between">
                 <div className="max-w-md">
                   <FadeUp delay={0.2}>
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       className="rounded-full border-2 px-8 border-primary hover:bg-primary hover:text-primary-foreground transition-colors"
                       asChild
                     >
@@ -178,7 +177,7 @@ export default function Home() {
                       </Link>
                     </Button>
                   </FadeUp>
-                  
+
                   <FadeUp delay={0.3}>
                     <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
                       SOMOS ESPECIALISTAS EM DESENVOLVIMENTO WEB
@@ -187,7 +186,7 @@ export default function Home() {
                     </p>
                   </FadeUp>
                 </div>
-                
+
                 <FadeIn delay={0.4}>
                   <div className="flex items-end mt-12 md:mt-0">
                     <div className="flex items-center space-x-2">
@@ -197,7 +196,7 @@ export default function Home() {
                   </div>
                 </FadeIn>
               </div>
-              
+
               <FadeUp delay={0.5}>
                 <div className="mt-24 gradient-divider mb-8"></div>
                 <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
@@ -223,7 +222,7 @@ export default function Home() {
                     <span className="gradient-text">TECNOLOGIAS ALIENÍGENAS</span>
                   </h2>
                   <p className="max-w-md text-sm leading-relaxed text-muted-foreground mt-6 md:mt-0">
-                    Oferecemos serviços de desenvolvimento web de outro mundo, 
+                    Oferecemos serviços de desenvolvimento web de outro mundo,
                     perfeitamente adaptados às necessidades da sua espécie empresarial.
                   </p>
                 </div>
@@ -232,7 +231,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {services.map((service, index) => (
                   <StaggerItem key={index}>
-                    <motion.div 
+                    <motion.div
                       className="p-6 border border-border hover:border-primary/40 transition-colors bg-card"
                       whileHover={{ y: -5 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
@@ -263,7 +262,7 @@ export default function Home() {
                     <span className="gradient-text">COMPLETADAS</span>
                   </h2>
                   <p className="max-w-md text-sm leading-relaxed text-muted-foreground mt-6 md:mt-0">
-                    Explore algumas das nossas incursões recentes e descubra como 
+                    Explore algumas das nossas incursões recentes e descubra como
                     podemos transportar sua presença digital para uma nova dimensão.
                   </p>
                 </div>
@@ -272,7 +271,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {projects.map((project, index) => (
                   <StaggerItem key={index}>
-                    <motion.div 
+                    <motion.div
                       className="group cursor-pointer"
                       whileHover={{ y: -5 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
@@ -308,9 +307,9 @@ export default function Home() {
                   <span className="gradient-text">ALIANÇA GALÁCTICA</span>
                 </h2>
               </FadeUp>
-              
+
               <FadeUp delay={0.2}>
-                <Button 
+                <Button
                   className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 transition-colors"
                   asChild
                 >
@@ -340,13 +339,13 @@ export default function Home() {
               Transformando sua visão em sinais digitais detectáveis por toda a galáxia.
             </p>
           </div>
-          
+
           <div className="mt-8 md:mt-0">
-            <h3 className="text-sm font-medium mb-4">TRANSMISSÕES</h3>
+            <h3 className="text-sm font-medium mb-4">CONTATO</h3>
             <p className="text-sm text-muted-foreground">contato@navemae.com</p>
             <p className="text-sm text-muted-foreground">+55 (11) 9999-9999</p>
           </div>
-          
+
           <div className="mt-8 md:mt-0">
             <h3 className="text-sm font-medium mb-4">REDE SUBNEURAL</h3>
             <div className="flex flex-col space-y-2">
@@ -356,7 +355,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
+
         <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Nave Mãe. Todos os direitos reservados em todos os sistemas solares.
