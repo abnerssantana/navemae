@@ -101,12 +101,12 @@ export default function Home() {
           </Button>
 
           <nav className="flex flex-col items-center space-y-8">
-            {["BASE TERRESTRE", "SERVIÇOS ESTELARES", "MISSÕES", "CONTATO"].map((item) => (
+            {["BASE", "SERVIÇOS", "MISSÕES", "CONTATO"].map((item) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * ["BASE TERRESTRE", "SERVIÇOS ESTELARES", "MISSÕES", "CONTATO"].indexOf(item) }}
+                transition={{ delay: 0.1 * ["BASE", "SERVIÇOS", "MISSÕES", "CONTATO"].indexOf(item) }}
               >
                 <Link
                   href={`#${item.toLowerCase()}`}
@@ -178,10 +178,8 @@ export default function Home() {
                   </FadeUp>
 
                   <FadeUp delay={0.3}>
-                    <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
-                      SOMOS ESPECIALISTAS EM DESENVOLVIMENTO WEB
-                      <br />
-                      DE OUTRO PLANETA.
+                    <p className="mt-8 text-sm leading-relaxed text-muted-foreground max-w-80">
+                      SOMOS ESPECIALISTAS EM DESENVOLVIMENTO WEB DE OUTRO PLANETA.
                     </p>
                   </FadeUp>
                 </div>
