@@ -331,8 +331,8 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-between">
           <div>
             <div className="flex space-x-2">
-              <div className="h-8 w-8 rounded-full bg-primary"></div>
-              <div className="h-8 w-8 rounded-full bg-accent"></div>
+              <div className="h-6 w-6 rounded-full bg-primary"></div>
+              <div className="h-6 w-6 rounded-full bg-accent"></div>
             </div>
             <p className="text-sm text-muted-foreground mt-6 max-w-xs">
               Desenvolvimento web profissional com foco em resultados.
