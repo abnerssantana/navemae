@@ -33,51 +33,51 @@ export default function Home() {
   const services = [
     {
       icon: <Code className="h-5 w-5 text-primary" />,
-      title: "Desenvolvimento Web",
-      description: "Sites responsivos com experiências interativas e performáticas."
+      title: "Desenvolvimento Intergaláctico",
+      description: "Sites responsivos que funcionam em qualquer dispositivo da Via Láctea."
     },
     {
       icon: <Rocket className="h-5 w-5 text-primary" />,
-      title: "Landing Pages",
-      description: "Páginas de conversão estratégicas que transformam visitantes em clientes."
+      title: "Landing Pages Orbitais",
+      description: "Páginas de conversão que atraem visitantes como um campo gravitacional."
     },
     {
       icon: <Search className="h-5 w-5 text-primary" />,
-      title: "SEO Avançado",
-      description: "Estratégias para aumentar sua visibilidade online."
+      title: "SEO Extraterrestre",
+      description: "Estratégias para ser encontrado em qualquer sistema solar."
     },
     {
       icon: <Zap className="h-5 w-5 text-primary" />,
-      title: "Performance",
-      description: "Velocidade é essencial. Sites que carregam instantaneamente."
+      title: "Velocidade Warp",
+      description: "Sites com velocidade mais rápida que a luz. Isso não é ficção científica."
     },
     {
       icon: <ShoppingCart className="h-5 w-5 text-primary" />,
-      title: "E-commerce",
-      description: "Lojas virtuais completas com gestão de produtos e pagamentos."
+      title: "E-commerce Cósmico",
+      description: "Lojas virtuais que vendem para todos os quadrantes da galáxia."
     },
     {
       icon: <PaintBucket className="h-5 w-5 text-primary" />,
-      title: "UI/UX Design",
-      description: "Interfaces intuitivas que proporcionam experiências memoráveis."
+      title: "Design UI/UX Alienígena",
+      description: "Interfaces tão intuitivas que até ETs conseguem navegar sem tradutor."
     }
   ]
 
   const projects = [
     {
-      title: "Portal Institucional",
+      title: "Portal Interdimensional",
       category: "Desenvolvimento Web",
-      description: "Redesign completo com interface moderna e sistema de gerenciamento de conteúdo."
+      description: "Redesign completo com interface que transcende o espaço-tempo."
     },
     {
-      title: "E-commerce Premium",
+      title: "E-commerce Premium Jupteriano",
       category: "Loja Virtual",
-      description: "Plataforma de vendas completa com integração de pagamentos e logística."
+      description: "Plataforma de vendas completa com entregas em qualquer lua de Júpiter."
     },
     {
-      title: "Aplicação Educacional",
+      title: "Aplicação Educacional Marciana",
       category: "Aplicação Web",
-      description: "Sistema de aprendizado online com recursos interativos e gamificação."
+      description: "Sistema de aprendizado online que traduz conhecimento terrestre para qualquer espécie."
     }
   ]
 
@@ -101,12 +101,12 @@ export default function Home() {
           </Button>
           
           <nav className="flex flex-col items-center space-y-8">
-            {["HOME", "SERVIÇOS", "PROJETOS", "SOBRE", "CONTATO"].map((item) => (
+            {["BASE TERRESTRE", "SERVIÇOS ESTELARES", "MISSÕES", "TRIPULAÇÃO", "COMUNICAÇÃO"].map((item) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * ["HOME", "SERVIÇOS", "PROJETOS", "SOBRE", "CONTATO"].indexOf(item) }}
+                transition={{ delay: 0.1 * ["BASE TERRESTRE", "SERVIÇOS ESTELARES", "MISSÕES", "TRIPULAÇÃO", "COMUNICAÇÃO"].indexOf(item) }}
               >
                 <Link 
                   href={`#${item.toLowerCase()}`}
@@ -132,10 +132,10 @@ export default function Home() {
             className="text-sm transition-colors hover:text-primary"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
-            {theme === 'dark' ? 'LIGHT' : 'DARK'}
+            {theme === 'dark' ? 'MODO SOL' : 'MODO ECLIPSE'}
           </button>
           <Link href="/contato" className="text-sm hover:text-primary transition-colors">
-            CONTATO
+            TRANSMISSÃO
           </Link>
           <button 
             className="flex flex-col space-y-1"
@@ -154,11 +154,11 @@ export default function Home() {
             <div className="relative">
               <FadeUp>
                 <h1 className="max-w-3xl text-5xl md:text-7xl font-light leading-tight tracking-tight">
-                  <span className="gradient-text">DESENVOLVEMOS</span>
+                  <span className="gradient-text">COLONIZAMOS</span>
                   <br />
-                  EXPERIÊNCIAS
+                  O UNIVERSO
                   <br />
-                  DIGITAIS.
+                  DIGITAL.
                 </h1>
               </FadeUp>
               
@@ -172,7 +172,7 @@ export default function Home() {
                     >
                       <Link href="/contato">
                         <span className="relative flex items-center">
-                          INICIAR PROJETO
+                          INICIAR ABDUÇÃO
                           <ArrowUpRight className="ml-2 h-4 w-4" />
                         </span>
                       </Link>
@@ -183,7 +183,7 @@ export default function Home() {
                     <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
                       SOMOS ESPECIALISTAS EM DESENVOLVIMENTO WEB
                       <br />
-                      COM FOCO EM DESIGN E PERFORMANCE.
+                      DE OUTRO PLANETA.
                     </p>
                   </FadeUp>
                 </div>
@@ -191,7 +191,7 @@ export default function Home() {
                 <FadeIn delay={0.4}>
                   <div className="flex items-end mt-12 md:mt-0">
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm">QUEM SOMOS</span>
+                      <span className="text-sm">NOSSA ESPÉCIE</span>
                       <span className="h-px w-12 bg-primary"></span>
                     </div>
                   </div>
@@ -202,8 +202,9 @@ export default function Home() {
                 <div className="mt-24 gradient-divider mb-8"></div>
                 <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
                   Criamos experiências digitais que combinam design intuitivo com tecnologia
-                  avançada para construir, escalar e otimizar sua presença online. Desenvolvemos com as tecnologias
-                  mais recentes para criar sites e aplicações que se destacam em velocidade, segurança e experiência do usuário.
+                  avançada para construir, escalar e colonizar sua presença online. Desenvolvemos com tecnologias
+                  além da compreensão humana para criar sites e aplicações que viajam em velocidade warp,
+                  com segurança de nível intergaláctico e experiência do usuário transcendental.
                 </p>
               </FadeUp>
             </div>
@@ -217,13 +218,13 @@ export default function Home() {
               <StaggerItem>
                 <div className="flex flex-col md:flex-row justify-between items-start mb-16">
                   <h2 className="text-5xl font-light tracking-tight">
-                    NOSSOS
+                    NOSSAS
                     <br />
-                    <span className="gradient-text">SERVIÇOS</span>
+                    <span className="gradient-text">TECNOLOGIAS ALIENÍGENAS</span>
                   </h2>
                   <p className="max-w-md text-sm leading-relaxed text-muted-foreground mt-6 md:mt-0">
-                    Oferecemos serviços abrangentes de desenvolvimento web, 
-                    perfeitamente adaptados às necessidades do seu negócio.
+                    Oferecemos serviços de desenvolvimento web de outro mundo, 
+                    perfeitamente adaptados às necessidades da sua espécie empresarial.
                   </p>
                 </div>
               </StaggerItem>
@@ -257,13 +258,13 @@ export default function Home() {
               <StaggerItem>
                 <div className="flex flex-col md:flex-row justify-between items-start mb-16">
                   <h2 className="text-5xl font-light tracking-tight">
-                    PROJETOS
+                    MISSÕES
                     <br />
-                    <span className="gradient-text">SELECIONADOS</span>
+                    <span className="gradient-text">COMPLETADAS</span>
                   </h2>
                   <p className="max-w-md text-sm leading-relaxed text-muted-foreground mt-6 md:mt-0">
-                    Explore alguns dos nossos trabalhos recentes e descubra como 
-                    podemos transformar sua presença digital.
+                    Explore algumas das nossas incursões recentes e descubra como 
+                    podemos transportar sua presença digital para uma nova dimensão.
                   </p>
                 </div>
               </StaggerItem>
@@ -279,13 +280,13 @@ export default function Home() {
                       <div className="aspect-video bg-accent/10 mb-4 overflow-hidden rounded-md">
                         <div className="w-full h-full flex items-center justify-center relative">
                           <div className="absolute inset-0 modern-gradient opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                          <span className="text-muted-foreground text-sm">Visualização do Projeto</span>
+                          <span className="text-muted-foreground text-sm">Evidência Extraterrestre</span>
                         </div>
                       </div>
                       <div className="modern-badge inline-block mb-2">{project.category}</div>
                       <h3 className="text-xl font-light mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
                       <div className="flex items-center mt-4">
-                        <span className="text-sm mr-2 text-muted-foreground group-hover:text-primary transition-colors">Ver projeto</span>
+                        <span className="text-sm mr-2 text-muted-foreground group-hover:text-primary transition-colors">Examinar missão</span>
                         <ArrowRight className="h-4 w-4 text-primary" />
                       </div>
                     </motion.div>
@@ -302,9 +303,9 @@ export default function Home() {
             <div className="flex flex-col items-center text-center">
               <FadeUp>
                 <h2 className="text-5xl font-light tracking-tight mb-12">
-                  VAMOS TRABALHAR
+                  VAMOS FORMAR UMA
                   <br />
-                  <span className="gradient-text">JUNTOS</span>
+                  <span className="gradient-text">ALIANÇA GALÁCTICA</span>
                 </h2>
               </FadeUp>
               
@@ -315,7 +316,7 @@ export default function Home() {
                 >
                   <Link href="/contato">
                     <span className="text-lg font-light tracking-wide flex items-center">
-                      INICIAR CONVERSA
+                      ESTABELECER CONTATO
                       <ArrowUpRight className="ml-2 h-5 w-5" />
                     </span>
                   </Link>
@@ -335,37 +336,37 @@ export default function Home() {
               <div className="h-6 w-6 rounded-full bg-accent"></div>
             </div>
             <p className="text-sm text-muted-foreground mt-6 max-w-xs">
-              Desenvolvimento web profissional com foco em resultados.
-              Transformando sua visão em uma presença digital impactante.
+              Desenvolvimento web profissional com tecnologia tão avançada que parece magia.
+              Transformando sua visão em sinais digitais detectáveis por toda a galáxia.
             </p>
           </div>
           
           <div className="mt-8 md:mt-0">
-            <h3 className="text-sm font-medium mb-4">CONTATO</h3>
+            <h3 className="text-sm font-medium mb-4">TRANSMISSÕES</h3>
             <p className="text-sm text-muted-foreground">contato@navemae.com</p>
             <p className="text-sm text-muted-foreground">+55 (11) 9999-9999</p>
           </div>
           
           <div className="mt-8 md:mt-0">
-            <h3 className="text-sm font-medium mb-4">SOCIAL</h3>
+            <h3 className="text-sm font-medium mb-4">REDE SUBNEURAL</h3>
             <div className="flex flex-col space-y-2">
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Instagram</Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">LinkedIn</Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Behance</Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Instagram Espacial</Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">LinkedIn Cósmico</Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Behance Sideral</Link>
             </div>
           </div>
         </div>
         
         <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Nave Mãe. Todos os direitos reservados.
+            © {new Date().getFullYear()} Nave Mãe. Todos os direitos reservados em todos os sistemas solares.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors">
-              Termos de Uso
+              Tratado Intergaláctico
             </Link>
             <Link href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors">
-              Política de Privacidade
+              Política de Não-Invasão
             </Link>
           </div>
         </div>
