@@ -165,12 +165,11 @@ export default function Home() {
                 <div className="max-w-md">
                   <FadeUp delay={0.2}>
                     <Button
-                      variant="outline"
-                      className="rounded-full border-2 px-8 border-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+                      className="btn-gradient rounded-full px-8 py-6"
                       asChild
                     >
                       <Link href="/contato">
-                        <span className="relative flex items-center">
+                        <span className="text-lg font-light tracking-wide flex items-center">
                           INICIAR ABDUÇÃO
                           <ArrowUpRight className="ml-2 h-4 w-4" />
                         </span>
@@ -310,12 +309,12 @@ export default function Home() {
 
               <FadeUp delay={0.2}>
                 <Button
-                  className="rounded-full px-8 py-6 bg-primary hover:bg-primary/90 transition-colors"
+                  className="btn-gradient rounded-full px-8 py-6"
                   asChild
                 >
                   <Link href="/contato">
                     <span className="text-lg font-light tracking-wide flex items-center">
-                      ESTABELECER CONTATO
+                      INICIAR CONVERSA
                       <ArrowUpRight className="ml-2 h-5 w-5" />
                     </span>
                   </Link>
