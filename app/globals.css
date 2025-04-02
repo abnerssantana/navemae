@@ -31,28 +31,34 @@
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.25 0 0);
+  /* Reduced border radius for a more minimalist look */
+  --radius: 0.25rem;
+  
+  /* Light mode - clean and minimal */
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.2 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.25 0 0);
+  --card-foreground: oklch(0.2 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.25 0 0);
+  --popover-foreground: oklch(0.2 0 0);
   
-  /* Modern blue as primary color */
-  --primary: oklch(0.55 0.18 265);
-  --primary-foreground: oklch(0.98 0 0);
+  /* Subtle blue as primary color */
+  --primary: oklch(0.5 0.15 255);
+  --primary-foreground: oklch(0.99 0 0);
   
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.3 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.92 0.03 265);
-  --accent-foreground: oklch(0.3 0 0);
-  --destructive: oklch(0.6 0.24 30);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.9 0 0);
-  --ring: oklch(0.55 0.18 265 / 30%);
+  /* Refined neutral tones */
+  --secondary: oklch(0.98 0 0);
+  --secondary-foreground: oklch(0.25 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.95 0.05 255);
+  --accent-foreground: oklch(0.25 0 0);
+  --destructive: oklch(0.65 0.2 30);
+  
+  /* Subtle borders and inputs */
+  --border: oklch(0.93 0 0);
+  --input: oklch(0.93 0 0);
+  --ring: oklch(0.5 0.15 255 / 30%);
   
   /* Font variables for Geist */
   --font-geist-sans: var(--GeistSans-font);
@@ -60,27 +66,31 @@
 }
 
 .dark {
-  --background: oklch(0.18 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.22 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.22 0 0);
-  --popover-foreground: oklch(0.95 0 0);
+  /* Dark mode - elegant minimalism */
+  --background: oklch(0.15 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.98 0 0);
   
-  /* Modern blue for dark mode */
-  --primary: oklch(0.65 0.2 265);
-  --primary-foreground: oklch(0.18 0 0);
+  /* Subtle blue for dark mode */
+  --primary: oklch(0.7 0.15 255);
+  --primary-foreground: oklch(0.15 0 0);
   
-  --secondary: oklch(0.25 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.3 0.1 265);
-  --accent-foreground: oklch(0.95 0 0);
-  --destructive: oklch(0.7 0.19 22);
-  --border: oklch(1 0 0 / 15%);
-  --input: oklch(1 0 0 / 20%);
-  --ring: oklch(0.65 0.2 265 / 30%);
+  /* Refined dark neutrals */
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.75 0 0);
+  --accent: oklch(0.25 0.08 255);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.7 0.18 22);
+  
+  /* Subtle borders in dark mode */
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.7 0.15 255 / 30%);
 }
 
 @layer base {
@@ -106,20 +116,20 @@
   @apply transition-all duration-300;
 }
 
-/* Modern gradient effect */
+/* Minimalist gradient effect */
 .modern-gradient {
   background: linear-gradient(
     135deg,
     var(--primary) 0%,
-    oklch(0.6 0.15 240) 100%
+    oklch(0.55 0.12 240) 100%
   );
 }
 
 .modern-gradient-subtle {
   background: linear-gradient(
     135deg,
-    oklch(from var(--primary) l c h / 10%) 0%,
-    oklch(0.6 0.15 240 / 5%) 100%
+    oklch(from var(--primary) l c h / 8%) 0%,
+    oklch(0.55 0.12 240 / 4%) 100%
   );
 }
 
@@ -131,20 +141,20 @@
   transform: translateY(-4px);
 }
 
-/* Custom scrollbar for webkit browsers */
+/* Custom scrollbar for webkit browsers - more subtle */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--muted);
-  border-radius: 3px;
+  background: var(--secondary);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--primary);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -153,10 +163,35 @@
 
 /* Image background blur effect */
 .backdrop-blur-image {
-  @apply backdrop-blur-md bg-background/50;
+  @apply backdrop-blur-md bg-background/40;
 }
 
-/* Modern badge style */
+/* Modern badge style - more minimal */
 .modern-badge {
-  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium;
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground;
+}
+
+/* New classes for minimalist design */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Animated spinning element for buttons */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+/* Dot grid pattern for backgrounds */
+.dot-pattern {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
 }

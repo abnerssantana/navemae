@@ -1,34 +1,27 @@
 import { type ReactNode } from "react"
-import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
 
-interface ServiceCardProps {
+interface MinimalistServiceCardProps {
   icon: ReactNode
   title: string
   description: string
 }
 
-export function ServiceCard({ icon, title, description }: ServiceCardProps) {
+export function MinimalistServiceCard({ icon, title, description }: MinimalistServiceCardProps) {
   return (
     <motion.div
-      className="h-full"
+      className="group cursor-pointer"
       whileHover={{ y: -5 }}
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
     >
-      <Card className="h-full rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 bg-card overflow-hidden border border-primary/20 hover:border-primary/40">
-        <CardContent className="pt-6 pb-4 px-6">
-          <div className="flex flex-col gap-4">
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary/10 text-primary">
-              {icon}
-            </div>
-            
-            <div>
-              <h3 className="font-medium text-lg mb-2">{title}</h3>
-              <p className="text-muted-foreground">{description}</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="p-6 border border-neutral-200 hover:border-black transition-colors duration-300">
+        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-neutral-100 group-hover:bg-neutral-200 transition-colors">
+          {icon}
+        </div>
+        
+        <h3 className="text-xl font-light mt-6 mb-3">{title}</h3>
+        <p className="text-sm text-neutral-600">{description}</p>
+      </div>
     </motion.div>
   )
 }
