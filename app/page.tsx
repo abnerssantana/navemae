@@ -153,7 +153,7 @@ export default function Home() {
           <section className="relative py-16 md:py-24">
             <div className="relative">
               <FadeUp>
-                <h1 className="max-w-3xl text-6xl md:text-7xl font-light leading-tight tracking-tight">
+                <h1 className="max-w-3xl text-5xl md:text-7xl font-light leading-tight tracking-tight">
                   <span className="gradient-text">DESENVOLVEMOS</span>
                   <br />
                   EXPERIÊNCIAS
