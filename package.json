@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "node scripts/ensure-dirs.js && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "ensure-dirs": "node scripts/ensure-dirs.js"
