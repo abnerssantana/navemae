@@ -1,68 +1,30 @@
-// app/projetos/[slug]/page.tsx
-import { Metadata } from "next"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { getProjectBySlug, getAllProjects } from "@/lib/mdx"
-import { mdxComponents } from "@/components/mdx/mdx-components"
-import { ProjectHeader, ProjectImage, ProjectCallToAction, RelatedProjects } from "@/components/project-detail"
-
-interface ProjectPageProps {
-  params: {
-    slug: string
-  }
-}
-
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const project = await getProjectBySlug(params.slug)
-  
-  if (!project) {
-    return {
-      title: "Projeto não encontrado | Nave Mãe",
-      description: "A missão que você procura não foi encontrada em nossa base de dados intergaláctica.",
-    }
-  }
-  
-  return {
-    title: `${project.metadata.title} | Nave Mãe`,
-    description: project.metadata.description,
-    openGraph: {
-      title: `${project.metadata.title} | Nave Mãe`,
-      description: project.metadata.description,
-      type: "article",
-      url: `https://navemae.com/projetos/${params.slug}`,
-      images: [
-        {
-          url: project.metadata.image || "https://navemae.com/og-image.jpg",
-          width: 1200,
-          height: 630,
-          alt: project.metadata.title,
-        }
-      ]
-    }
-  }
-}
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getProjectBySlug, getAllProjects } from "@/lib/mdx";
+import { ProjectHeader, ProjectImage, ProjectCallToAction, RelatedProjects } from "@/components/project-detail";
 
 export async function generateStaticParams() {
-  const projects = await getAllProjects()
-  
+  const projects = await getAllProjects();
   return projects.map((project) => ({
     slug: project!.slug,
-  }))
+  }));
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const project = await getProjectBySlug(params.slug)
+export default async function Page({ params }: { params: { slug: string } }) {
+  // Get the project data
+  const project = await getProjectBySlug(params.slug);
   
+  // Handle 404
   if (!project) {
-    notFound()
+    notFound();
   }
   
-  // Get 3 related projects (excluding the current one)
-  const allProjects = await getAllProjects()
+  // Get related projects (excluding current)
+  const allProjects = await getAllProjects();
   const relatedProjects = allProjects
-    .filter(p => p!.slug !== params.slug)
+    .filter((p) => p!.slug !== params.slug)
     .slice(0, 3)
-    .map(p => p!)
+    .map((p) => p!);
   
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -113,5 +75,5 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </footer>
     </div>
-  )
+  );
 }

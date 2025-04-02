@@ -1,7 +1,6 @@
 // app/projetos/page.tsx
 import { Metadata } from "next"
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { FadeUp, StaggerChildren, StaggerItem } from "@/components/motion"
 import { getAllProjects } from "@/lib/mdx"
