@@ -32,33 +32,33 @@
 
 :root {
   /* Reduced border radius for a more minimalist look */
-  --radius: 0.25rem;
+  --radius: 0.3rem;
   
-  /* Light mode - clean and minimal */
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.2 0 0);
+  /* Light mode - clean white background */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.02 260);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0 0);
+  --card-foreground: oklch(0.18 0.02 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0 0);
+  --popover-foreground: oklch(0.18 0.02 260);
   
-  /* Subtle blue as primary color */
-  --primary: oklch(0.5 0.15 255);
+  /* Vibrant primary color - electric blue */
+  --primary: oklch(0.55 0.2 250);
   --primary-foreground: oklch(0.99 0 0);
   
   /* Refined neutral tones */
-  --secondary: oklch(0.98 0 0);
-  --secondary-foreground: oklch(0.25 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.95 0.05 255);
-  --accent-foreground: oklch(0.25 0 0);
+  --secondary: oklch(0.97 0.01 80);
+  --secondary-foreground: oklch(0.25 0.02 260);
+  --muted: oklch(0.96 0.01 80);
+  --muted-foreground: oklch(0.48 0.02 260);
+  --accent: oklch(0.95 0.06 265);
+  --accent-foreground: oklch(0.25 0.02 260);
   --destructive: oklch(0.65 0.2 30);
   
   /* Subtle borders and inputs */
-  --border: oklch(0.93 0 0);
-  --input: oklch(0.93 0 0);
-  --ring: oklch(0.5 0.15 255 / 30%);
+  --border: oklch(0.9 0.02 260);
+  --input: oklch(0.9 0.02 260);
+  --ring: oklch(0.55 0.2 250 / 35%);
   
   /* Font variables for Geist */
   --font-geist-sans: var(--GeistSans-font);
@@ -66,31 +66,31 @@
 }
 
 .dark {
-  /* Dark mode - elegant minimalism */
-  --background: oklch(0.15 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.18 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.18 0 0);
-  --popover-foreground: oklch(0.98 0 0);
+  /* Dark mode - rich deep blues and purples */
+  --background: oklch(0.12 0.03 265);
+  --foreground: oklch(0.96 0.01 80);
+  --card: oklch(0.16 0.03 260);
+  --card-foreground: oklch(0.96 0.01 80);
+  --popover: oklch(0.16 0.03 260);
+  --popover-foreground: oklch(0.96 0.01 80);
   
-  /* Subtle blue for dark mode */
-  --primary: oklch(0.7 0.15 255);
-  --primary-foreground: oklch(0.15 0 0);
+  /* Vibrant primary for dark mode - electric cyan */
+  --primary: oklch(0.75 0.18 200);
+  --primary-foreground: oklch(0.12 0.03 265);
   
-  /* Refined dark neutrals */
-  --secondary: oklch(0.22 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.22 0 0);
-  --muted-foreground: oklch(0.75 0 0);
-  --accent: oklch(0.25 0.08 255);
-  --accent-foreground: oklch(0.98 0 0);
+  /* Enhanced dark neutrals */
+  --secondary: oklch(0.18 0.04 260);
+  --secondary-foreground: oklch(0.96 0.01 80);
+  --muted: oklch(0.18 0.04 260);
+  --muted-foreground: oklch(0.75 0.02 80);
+  --accent: oklch(0.22 0.1 230);
+  --accent-foreground: oklch(0.96 0.01 80);
   --destructive: oklch(0.7 0.18 22);
   
-  /* Subtle borders in dark mode */
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.7 0.15 255 / 30%);
+  /* Enhanced borders in dark mode */
+  --border: oklch(1 0.02 260 / 15%);
+  --input: oklch(1 0.02 260 / 18%);
+  --ring: oklch(0.75 0.18 200 / 40%);
 }
 
 @layer base {
@@ -116,12 +116,15 @@
   @apply transition-all duration-300;
 }
 
-/* Minimalist gradient effect */
+/* Advanced multi-color gradients */
 .modern-gradient {
   background: linear-gradient(
     135deg,
     var(--primary) 0%,
-    oklch(0.55 0.12 240) 100%
+    oklch(0.6 0.2 190) 25%,
+    oklch(0.7 0.18 230) 50%,
+    oklch(0.58 0.19 280) 75%,
+    oklch(0.5 0.2 300) 100%
   );
 }
 
@@ -129,8 +132,50 @@
   background: linear-gradient(
     135deg,
     oklch(from var(--primary) l c h / 8%) 0%,
-    oklch(0.55 0.12 240 / 4%) 100%
+    oklch(0.6 0.2 190 / 5%) 50%,
+    oklch(0.7 0.18 230 / 10%) 100%
   );
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--primary),
+    oklch(0.7 0.18 230)
+  );
+}
+
+/* Dynamic gradient border */
+.gradient-border {
+  position: relative;
+  border-radius: var(--radius);
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    oklch(0.7 0.18 230) 50%,
+    oklch(0.58 0.19 280) 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* Subtle hover effects */
@@ -143,22 +188,30 @@
 
 /* Custom scrollbar for webkit browsers - more subtle */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
   background: var(--secondary);
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--primary),
+    oklch(0.65 0.18 230)
+  );
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(from var(--primary) l c h / 80%);
+  background: linear-gradient(
+    to bottom,
+    var(--primary),
+    oklch(0.58 0.19 280)
+  );
 }
 
 /* Image background blur effect */
@@ -168,10 +221,16 @@
 
 /* Modern badge style - more minimal */
 .modern-badge {
-  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground;
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium;
+  background: linear-gradient(
+    to right,
+    oklch(from var(--muted) l c h / 90%) 0%,
+    oklch(from var(--muted) l c h / 60%) 100%
+  );
+  color: var(--muted-foreground);
 }
 
-/* New classes for minimalist design */
+/* Text balance */
 .text-balance {
   text-wrap: balance;
 }
@@ -194,4 +253,54 @@
 .dot-pattern {
   background-image: radial-gradient(var(--border) 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+/* Glass morphism effect */
+.glass-effect {
+  background: oklch(from var(--background) l c h / 80%);
+  backdrop-filter: blur(8px);
+  border: 1px solid oklch(from var(--border) l c h / 30%);
+}
+
+/* Gradient animations */
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Accent dots */
+.accent-dots::before {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-image: 
+    radial-gradient(var(--primary) 1.5px, transparent 1.5px);
+  background-size: 15px 15px;
+  opacity: 0.25;
+  z-index: -1;
+}
+
+/* Gradient divider */
+.gradient-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary),
+    oklch(0.7 0.18 230),
+    transparent
+  );
 }
