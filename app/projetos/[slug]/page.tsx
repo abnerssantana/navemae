@@ -4,7 +4,6 @@ import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, getRelatedProjects } from "@/lib/projects";
 import { ProjectContent } from "@/components/project-content";
-import { FadeIn } from "@/components/motion";
 
 // Definição correta do tipo dos parâmetros
 interface PageProps {
