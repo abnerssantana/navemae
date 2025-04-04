@@ -6,11 +6,16 @@ import { getProjectBySlug, getRelatedProjects } from "@/lib/projects";
 import { ProjectContent } from "@/components/project-content";
 import { FadeIn } from "@/components/motion";
 
+// Definição correta do tipo dos parâmetros
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
 export async function generateMetadata({ 
   params 
-}: { 
-  params: { slug: string } 
-}): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const project = getProjectBySlug(params.slug);
   
   if (!project) {
@@ -26,20 +31,13 @@ export async function generateMetadata({
   };
 }
 
-export default function ProjectPage({ 
-  params 
-}: { 
-  params: { slug: string } 
-}) {
-  // Get the project by slug
+export default function ProjectPage({ params }: PageProps) { // Usando a interface corrigida
   const project = getProjectBySlug(params.slug);
   
-  // If project doesn't exist, show 404 page
   if (!project) {
     notFound();
   }
   
-  // Get related projects (excluding the current one)
   const relatedProjects = getRelatedProjects(params.slug, 3);
   
   return (
