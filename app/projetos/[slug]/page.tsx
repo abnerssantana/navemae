@@ -12,31 +12,31 @@ interface PageProps {
   };
 }
 
-export async function generateMetadata({ 
-  params: { slug } 
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const project = await getProjectBySlug(slug);
-  
+
   if (!project) {
     return {
       title: "Projeto não encontrado | Nave Mãe",
-      description: "O projeto que você está procurando não foi encontrado."
+      description: "O projeto que você está procurando não foi encontrado.",
     };
   }
-  
+
   return {
     title: `${project.title} | Nave Mãe`,
     description: project.description,
   };
 }
 
-export default async function ProjectPage({ params: { slug } }: PageProps) {
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const project = await getProjectBySlug(slug);
-  
+
   if (!project) {
     notFound();
   }
-  
+
   const relatedProjects = await getRelatedProjects(slug, 3);
   
   return (
