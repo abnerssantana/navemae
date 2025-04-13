@@ -13,9 +13,9 @@ interface PageProps {
 }
 
 export async function generateMetadata({ 
-  params 
+  params: { slug } 
 }: PageProps): Promise<Metadata> {
-  const project = getProjectBySlug(params.slug);
+  const project = await getProjectBySlug(slug);
   
   if (!project) {
     return {
@@ -30,14 +30,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectPage({ params }: PageProps) { // Usando a interface corrigida
-  const project = await getProjectBySlug(params.slug); 
+export default async function ProjectPage({ params: { slug } }: PageProps) {
+  const project = await getProjectBySlug(slug);
   
   if (!project) {
     notFound();
   }
   
-  const relatedProjects = getRelatedProjects(params.slug, 3);
+  const relatedProjects = await getRelatedProjects(slug, 3);
   
   return (
     <div className="min-h-screen bg-background text-foreground">
