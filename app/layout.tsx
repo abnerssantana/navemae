@@ -16,13 +16,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className="dark">
-      <body className={GeistSans.className}>
+      <body className={`${GeistSans.className} bg-background`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
         >
-          {children}
+          <div className="max-w-screen-2xl mx-auto">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
