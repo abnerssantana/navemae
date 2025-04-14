@@ -198,8 +198,8 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="h-2 w-2 rounded-full bg-primary"></div>
-          <div className="h-2 w-2 rounded-full bg-accent"></div>
+          <div className="h-5 w-5 rounded-full bg-primary"></div>
+          <div className="h-5 w-5 rounded-full bg-accent"></div>
         </motion.div>
         <motion.div
           className="flex items-center space-x-6"
