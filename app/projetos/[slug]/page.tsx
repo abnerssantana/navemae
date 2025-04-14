@@ -93,7 +93,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
           <div className="mt-8 md:mt-0">
             <h3 className="text-sm font-medium mb-4">CONTATO</h3>
-            <p className="text-sm text-muted-foreground">contato@navemae.com</p>
+            <p className="text-sm text-muted-foreground">contato@navemae.digital</p>
             <p className="text-sm text-muted-foreground">+55 (11) 9999-9999</p>
           </div>
 
