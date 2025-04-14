@@ -39,17 +39,17 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true)
-    
+
     // Função para buscar projetos da API
     const fetchProjects = async () => {
       try {
         setLoading(true)
         const response = await fetch('/api/projects')
-        
+
         if (!response.ok) {
           throw new Error('Falha ao buscar projetos')
         }
-        
+
         const data = await response.json()
         setProjects(data)
       } catch (error) {
@@ -88,7 +88,7 @@ export default function Home() {
         setLoading(false)
       }
     }
-    
+
     fetchProjects()
   }, [])
 
@@ -276,7 +276,7 @@ export default function Home() {
                 {services.map((service, index) => (
                   <StaggerItem key={index}>
                     <motion.div
-                      className="p-6 border border-border hover:border-primary/40 transition-colors bg-card"
+                      className="p-6 border border-border hover:border-primary/40 transition-colors bg-card h-full flex flex-col"
                       whileHover={{ y: -5 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
                     >
@@ -284,7 +284,7 @@ export default function Home() {
                         {service.icon}
                       </div>
                       <h3 className="text-xl font-light mt-6 mb-3">{service.title}</h3>
-                      <p className="text-sm text-muted-foreground">{service.description}</p>
+                      <p className="text-sm text-muted-foreground flex-grow">{service.description}</p>
                       <div className="mt-6 h-px w-0 bg-primary transition-all duration-300 group-hover:w-16"></div>
                     </motion.div>
                   </StaggerItem>
