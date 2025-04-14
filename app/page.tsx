@@ -15,7 +15,7 @@ import {
   ArrowUpRight,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { FadeIn, FadeUp, StaggerChildren, StaggerItem, HeroWrapper } from "@/components/motion"
+import { FadeIn, FadeUp, StaggerChildren, StaggerItem, HeroWrapper, AnimatedHeroText, BlinkingCursor } from "@/components/motion"
 
 // Define a interface de projeto para o lado do cliente
 interface Project {
@@ -36,6 +36,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
+  const [animationComplete, setAnimationComplete] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -90,6 +91,13 @@ export default function Home() {
     }
 
     fetchProjects()
+
+    // Timer para permitir animações iniciais completarem
+    const timer = setTimeout(() => {
+      setAnimationComplete(true)
+    }, 2000)
+
+    return () => clearTimeout(timer)
   }, [])
 
   // Don't render until mounted to prevent hydration issues
@@ -143,17 +151,31 @@ export default function Home() {
             className="absolute top-6 right-6 p-2"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="h-0.5 w-6 bg-foreground rotate-45 absolute"></span>
-            <span className="h-0.5 w-6 bg-foreground -rotate-45 absolute"></span>
+            <motion.span
+              className="h-0.5 w-6 bg-foreground absolute"
+              animate={{ rotate: 45 }}
+              initial={{ rotate: 0 }}
+              transition={{ duration: 0.3 }}
+            ></motion.span>
+            <motion.span
+              className="h-0.5 w-6 bg-foreground absolute"
+              animate={{ rotate: -45 }}
+              initial={{ rotate: 0 }}
+              transition={{ duration: 0.3 }}
+            ></motion.span>
           </Button>
 
           <nav className="flex flex-col items-center space-y-8">
-            {["BASE", "SERVIÇOS", "MISSÕES", "CONTATO"].map((item) => (
+            {["BASE", "SERVIÇOS", "MISSÕES", "CONTATO"].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * ["BASE", "SERVIÇOS", "MISSÕES", "CONTATO"].indexOf(item) }}
+                transition={{
+                  delay: 0.1 * index,
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
               >
                 <Link
                   href={`#${item.toLowerCase()}`}
@@ -170,11 +192,21 @@ export default function Home() {
 
       {/* Header */}
       <header className="flex items-center justify-between p-6 z-40 relative">
-        <div className="flex space-x-2">
+        <motion.div
+          className="flex space-x-2"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <div className="h-2 w-2 rounded-full bg-primary"></div>
           <div className="h-2 w-2 rounded-full bg-accent"></div>
-        </div>
-        <div className="flex items-center space-x-6">
+        </motion.div>
+        <motion.div
+          className="flex items-center space-x-6"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+        >
           <button
             className="text-sm transition-colors hover:text-primary"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -182,15 +214,18 @@ export default function Home() {
             {theme === 'dark' ? 'MODO SOL' : 'MODO ECLIPSE'}
           </button>
           <Link href="/contato" className="text-sm hover:text-primary transition-colors">
-            CONTATO          </Link>
-          <button
+            CONTATO
+          </Link>
+          <motion.button
             className="flex flex-col space-y-1"
             onClick={() => setMenuOpen(true)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <span className="h-0.5 w-6 bg-foreground"></span>
             <span className="h-0.5 w-6 bg-foreground"></span>
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </header>
 
       <main className="relative px-6 pt-12">
@@ -198,57 +233,125 @@ export default function Home() {
         <HeroWrapper>
           <section className="relative py-16 md:py-24">
             <div className="relative">
-              <FadeUp>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
+              >
                 <h1 className="max-w-3xl text-5xl md:text-7xl font-light leading-tight tracking-tight">
-                  <span className="gradient-text">COLONIZAMOS</span>
+                  <motion.span
+                    className="gradient-text inline-block"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                  >
+                    COLONIZAMOS
+                  </motion.span>
                   <br />
-                  O UNIVERSO
+                  <motion.span
+                    className="inline-block"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                  >
+                    O UNIVERSO
+                  </motion.span>
                   <br />
-                  DIGITAL.
+                  <motion.span
+                    className="inline-block"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  >
+                    DIGITAL
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 1.2 }}
+                  >
+                    .
+                  </motion.span>
                 </h1>
-              </FadeUp>
+              </motion.div>
 
               <div className="mt-24 flex flex-col md:flex-row justify-between">
                 <div className="max-w-md">
-                  <FadeUp delay={0.2}>
+                  <FadeUp delay={0.6}>
                     <Button
                       className="btn-gradient rounded-full px-8 py-6"
                       asChild
                     >
                       <Link href="/contato">
-                        <span className="text-lg font-light tracking-wide flex items-center">
+                        <motion.span
+                          className="text-lg font-light tracking-wide flex items-center"
+                          whileHover={{ x: 5 }}
+                          transition={{ duration: 0.3 }}
+                        >
                           INICIAR ABDUÇÃO
-                          <ArrowUpRight className="ml-2 h-4 w-4" />
-                        </span>
+                          <motion.div
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{
+                              duration: 1.5,
+                              repeat: Infinity,
+                              repeatType: "reverse"
+                            }}
+                          >
+                            <ArrowUpRight className="ml-2 h-4 w-4" />
+                          </motion.div>
+                        </motion.span>
                       </Link>
                     </Button>
                   </FadeUp>
 
-                  <FadeUp delay={0.3}>
-                    <p className="mt-8 text-sm leading-relaxed text-muted-foreground max-w-80">
+                  <FadeUp delay={0.8}>
+                    <motion.p
+                      className="mt-8 text-sm leading-relaxed text-muted-foreground max-w-80"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 1 }}
+                    >
                       SOMOS ESPECIALISTAS EM DESENVOLVIMENTO WEB DE OUTRO PLANETA.
-                    </p>
+                    </motion.p>
                   </FadeUp>
                 </div>
 
-                <FadeIn delay={0.4}>
+                <FadeIn delay={1.2}>
                   <div className="flex items-end mt-12 md:mt-0">
-                    <div className="flex items-center space-x-2">
+                    <motion.div
+                      className="flex items-center space-x-2"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <span className="text-sm">NOSSA ESPÉCIE</span>
-                      <span className="h-px w-12 bg-primary"></span>
-                    </div>
+                      <motion.span
+                        className="h-px w-12 bg-primary"
+                        whileHover={{ width: "60px" }}
+                        transition={{ duration: 0.3 }}
+                      ></motion.span>
+                    </motion.div>
                   </div>
                 </FadeIn>
               </div>
 
-              <FadeUp delay={0.5}>
-                <div className="mt-24 gradient-divider mb-8"></div>
-                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+              <FadeUp delay={1.4}>
+                <motion.div
+                  className="mt-24 gradient-divider mb-8"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 1.5, delay: 1.6 }}
+                ></motion.div>
+                <motion.p
+                  className="max-w-xl text-sm leading-relaxed text-muted-foreground"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 2 }}
+                >
                   Criamos experiências digitais que combinam design intuitivo com tecnologia
                   avançada para construir, escalar e colonizar sua presença online. Desenvolvemos com tecnologias
                   além da compreensão humana para criar sites e aplicações que viajam em velocidade warp,
                   com segurança de nível intergaláctico e experiência do usuário transcendental.
-                </p>
+                </motion.p>
               </FadeUp>
             </div>
           </section>
@@ -257,18 +360,38 @@ export default function Home() {
         {/* Services Section */}
         <section id="serviços" className="py-24 md:py-32">
           <div className="relative">
-            <StaggerChildren>
+            <StaggerChildren staggerDelay={0.1}>
               <StaggerItem>
                 <div className="flex flex-col md:flex-row justify-between items-start mb-16">
-                  <h2 className="text-5xl font-light tracking-tight">
+                  <motion.h2
+                    className="text-5xl font-light tracking-tight"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                  >
                     NOSSAS
                     <br />
-                    <span className="gradient-text">TECNOLOGIAS ALIENÍGENAS</span>
-                  </h2>
-                  <p className="max-w-md text-sm leading-relaxed text-muted-foreground mt-6 md:mt-0">
+                    <motion.span
+                      className="gradient-text"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.8, delay: 0.3 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      TECNOLOGIAS ALIENÍGENAS
+                    </motion.span>
+                  </motion.h2>
+                  <motion.p
+                    className="max-w-md text-sm leading-relaxed text-muted-foreground mt-6 md:mt-0"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                  >
                     Oferecemos serviços de desenvolvimento web de outro mundo,
                     perfeitamente adaptados às necessidades da sua espécie empresarial.
-                  </p>
+                  </motion.p>
                 </div>
               </StaggerItem>
 
@@ -279,13 +402,24 @@ export default function Home() {
                       className="p-6 border border-border hover:border-primary/40 transition-colors bg-card h-full flex flex-col"
                       whileHover={{ y: -5 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
                     >
-                      <div className="w-12 h-12 rounded-full flex items-center justify-center bg-accent/10">
+                      <motion.div
+                        className="w-12 h-12 rounded-full flex items-center justify-center bg-accent/10"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 1.5 }}
+                      >
                         {service.icon}
-                      </div>
+                      </motion.div>
                       <h3 className="text-xl font-light mt-6 mb-3">{service.title}</h3>
                       <p className="text-sm text-muted-foreground flex-grow">{service.description}</p>
-                      <div className="mt-6 h-px w-0 bg-primary transition-all duration-300 group-hover:w-16"></div>
+                      <motion.div
+                        className="mt-6 h-px w-0 bg-primary"
+                        whileHover={{ width: "4rem" }}
+                        transition={{ duration: 0.3 }}
+                      ></motion.div>
                     </motion.div>
                   </StaggerItem>
                 ))}
@@ -297,18 +431,38 @@ export default function Home() {
         {/* Projects Section */}
         <section id="projetos" className="py-24 md:py-32 border-t border-border">
           <div className="relative">
-            <StaggerChildren>
+            <StaggerChildren staggerDelay={0.1}>
               <StaggerItem>
                 <div className="flex flex-col md:flex-row justify-between items-start mb-16">
-                  <h2 className="text-5xl font-light tracking-tight">
+                  <motion.h2
+                    className="text-5xl font-light tracking-tight"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                  >
                     MISSÕES
                     <br />
-                    <span className="gradient-text">COMPLETADAS</span>
-                  </h2>
-                  <p className="max-w-md text-sm leading-relaxed text-muted-foreground mt-6 md:mt-0">
+                    <motion.span
+                      className="gradient-text"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.8, delay: 0.3 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      COMPLETADAS
+                    </motion.span>
+                  </motion.h2>
+                  <motion.p
+                    className="max-w-md text-sm leading-relaxed text-muted-foreground mt-6 md:mt-0"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                  >
                     Explore algumas das nossas incursões recentes e descubra como
                     podemos transportar sua presença digital para uma nova dimensão.
-                  </p>
+                  </motion.p>
                 </div>
               </StaggerItem>
 
@@ -317,23 +471,47 @@ export default function Home() {
                   // Estado de carregamento
                   Array.from({ length: 3 }).map((_, index) => (
                     <StaggerItem key={`skeleton-${index}`}>
-                      <div className="p-6 border border-border bg-card">
-                        <div className="aspect-video bg-accent/10 mb-4 rounded-md animate-pulse"></div>
-                        <div className="h-6 w-24 bg-accent/10 rounded-full mb-4 animate-pulse"></div>
-                        <div className="h-8 w-full bg-accent/10 rounded-md mb-4 animate-pulse"></div>
-                        <div className="h-4 w-32 bg-accent/10 rounded-md animate-pulse"></div>
-                      </div>
+                      <motion.div
+                        className="p-6 border border-border bg-card"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                      >
+                        <motion.div
+                          className="aspect-video bg-accent/10 mb-4 rounded-md"
+                          animate={{ opacity: [0.5, 0.8, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        ></motion.div>
+                        <motion.div
+                          className="h-6 w-24 bg-accent/10 rounded-full mb-4"
+                          animate={{ opacity: [0.5, 0.8, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                        ></motion.div>
+                        <motion.div
+                          className="h-8 w-full bg-accent/10 rounded-md mb-4"
+                          animate={{ opacity: [0.5, 0.8, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                        ></motion.div>
+                        <motion.div
+                          className="h-4 w-32 bg-accent/10 rounded-md"
+                          animate={{ opacity: [0.5, 0.8, 0.5] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0.9 }}
+                        ></motion.div>
+                      </motion.div>
                     </StaggerItem>
                   ))
                 ) : (
                   // Projetos carregados
-                  projects.map((project) => (
+                  projects.map((project, index) => (
                     <StaggerItem key={project.slug}>
                       <Link href={`/projetos/${project.slug}`}>
                         <motion.div
                           className="group cursor-pointer"
                           whileHover={{ y: -5 }}
                           transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                          initial={{ opacity: 0, y: 30 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: "-50px" }}
                         >
                           <div className="aspect-video bg-accent/10 mb-4 overflow-hidden rounded-md">
                             <div className="w-full h-full relative">
@@ -351,15 +529,40 @@ export default function Home() {
                                   <span className="text-muted-foreground text-sm">Evidência Extraterrestre</span>
                                 </div>
                               )}
-                              <div className="absolute inset-0 modern-gradient opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                              <motion.div
+                                className="absolute inset-0 modern-gradient opacity-0 transition-opacity duration-500"
+                                whileHover={{ opacity: 0.2 }}
+                              ></motion.div>
                             </div>
                           </div>
                           <div className="modern-badge inline-block mb-2">{project.category}</div>
-                          <h3 className="text-xl font-light mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                          <div className="flex items-center mt-4">
-                            <span className="text-sm mr-2 text-muted-foreground group-hover:text-primary transition-colors">Examinar missão</span>
-                            <ArrowRight className="h-4 w-4 text-primary" />
-                          </div>
+                          <motion.h3
+                            className="text-xl font-light mb-2 group-hover:text-primary transition-colors"
+                            whileHover={{ x: 3 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            {project.title}
+                          </motion.h3>
+                          <motion.div
+                            className="flex items-center mt-4"
+                            whileHover={{ x: 3 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <span className="text-sm mr-2 text-muted-foreground group-hover:text-primary transition-colors">
+                              Examinar missão
+                            </span>
+                            <motion.div
+                              animate={animationComplete ? { x: [0, 3, 0] } : {}}
+                              transition={{
+                                duration: 1.5,
+                                repeat: Infinity,
+                                repeatType: "reverse",
+                                delay: index * 0.2
+                              }}
+                            >
+                              <ArrowRight className="h-4 w-4 text-primary" />
+                            </motion.div>
+                          </motion.div>
                         </motion.div>
                       </Link>
                     </StaggerItem>
@@ -368,19 +571,38 @@ export default function Home() {
               </div>
 
               <StaggerItem>
-                <div className="mt-16 flex justify-center">
+                <motion.div
+                  className="mt-16 flex justify-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  viewport={{ once: true }}
+                >
                   <Button
                     className="btn-gradient-outline rounded-full px-8 py-4"
                     asChild
                   >
                     <Link href="/projetos">
-                      <span className="text-md font-light tracking-wide flex items-center">
+                      <motion.span
+                        className="text-md font-light tracking-wide flex items-center"
+                        whileHover={{ x: 5 }}
+                        transition={{ duration: 0.3 }}
+                      >
                         VER TODOS OS PROJETOS
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </span>
+                        <motion.div
+                          animate={animationComplete ? { x: [0, 5, 0] } : {}}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            repeatType: "reverse"
+                          }}
+                        >
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </motion.div>
+                      </motion.span>
                     </Link>
                   </Button>
-                </div>
+                </motion.div>
               </StaggerItem>
             </StaggerChildren>
           </div>
@@ -390,27 +612,58 @@ export default function Home() {
         <section id="contato" className="py-24 md:py-32 border-t border-border">
           <div className="relative">
             <div className="flex flex-col items-center text-center">
-              <FadeUp>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
                 <h2 className="text-5xl font-light tracking-tight mb-12">
                   VAMOS FORMAR UMA
                   <br />
-                  <span className="gradient-text">ALIANÇA GALÁCTICA</span>
+                  <motion.span
+                    className="gradient-text"
+                    initial={{ backgroundPosition: "0% 50%" }}
+                    whileInView={{ backgroundPosition: "100% 50%" }}
+                    transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                    viewport={{ once: true }}
+                  >
+                    ALIANÇA GALÁCTICA
+                  </motion.span>
                 </h2>
-              </FadeUp>
+              </motion.div>
 
-              <FadeUp delay={0.2}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
                 <Button
                   className="btn-gradient rounded-full px-8 py-6"
                   asChild
                 >
                   <Link href="/contato">
-                    <span className="text-lg font-light tracking-wide flex items-center">
+                    <motion.span
+                      className="text-lg font-light tracking-wide flex items-center"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       INICIAR CONVERSA
-                      <ArrowUpRight className="ml-2 h-5 w-5" />
-                    </span>
+                      <motion.div
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          repeatType: "reverse"
+                        }}
+                      >
+                        <ArrowUpRight className="ml-2 h-5 w-5" />
+                      </motion.div>
+                    </motion.span>
                   </Link>
                 </Button>
-              </FadeUp>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -419,7 +672,12 @@ export default function Home() {
       {/* Footer */}
       <footer className="px-6 py-12 border-t border-border">
         <div className="flex flex-col md:flex-row justify-between">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
             <div className="flex space-x-2">
               <div className="h-6 w-6 rounded-full bg-primary"></div>
               <div className="h-6 w-6 rounded-full bg-accent"></div>
@@ -428,25 +686,43 @@ export default function Home() {
               Desenvolvimento web profissional com tecnologia tão avançada que parece magia.
               Transformando sua visão em sinais digitais detectáveis por toda a galáxia.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="mt-8 md:mt-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mt-8 md:mt-0"
+          >
             <h3 className="text-sm font-medium mb-4">CONTATO</h3>
             <p className="text-sm text-muted-foreground">contato@navemae.com</p>
             <p className="text-sm text-muted-foreground">+55 (11) 9999-9999</p>
-          </div>
+          </motion.div>
 
-          <div className="mt-8 md:mt-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-8 md:mt-0"
+          >
             <h3 className="text-sm font-medium mb-4">REDE SUBNEURAL</h3>
             <div className="flex flex-col space-y-2">
               <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Instagram Espacial</Link>
               <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">LinkedIn Cósmico</Link>
               <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Behance Sideral</Link>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center"
+        >
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Nave Mãe. Todos os direitos reservados em todos os sistemas solares.
           </p>
@@ -458,7 +734,7 @@ export default function Home() {
               Política de Não-Invasão
             </Link>
           </div>
-        </div>
+        </motion.div>
       </footer>
     </div>
   )
