@@ -5,18 +5,18 @@ import { notFound } from "next/navigation";
 import { getProjectBySlug, getRelatedProjects } from "@/lib/projects";
 import { ProjectContent } from "@/components/project-content";
 
-// Define proper interface for page props
+// Ajuste na interface para refletir o tipo esperado
 interface ProjectPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata(
   props: ProjectPageProps
 ): Promise<Metadata> {
-  // Correctly handle params in Next.js 15
-  const params = await Promise.resolve(props.params);
+  // Resolve a Promise de params
+  const params = await props.params;
   const project = getProjectBySlug(params.slug);
 
   if (!project) {
@@ -33,8 +33,8 @@ export async function generateMetadata(
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  // Correctly handle params in Next.js 15
-  const resolvedParams = await Promise.resolve(params);
+  // Resolve a Promise de params
+  const resolvedParams = await params;
   const project = getProjectBySlug(resolvedParams.slug);
 
   if (!project) {
@@ -42,7 +42,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   const relatedProjects = getRelatedProjects(resolvedParams.slug, 3);
-  
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
