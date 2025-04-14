@@ -13,18 +13,83 @@ import {
   ShoppingCart,
   PaintBucket,
   ArrowUpRight,
-  Star,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { FadeIn, FadeUp, StaggerChildren, StaggerItem, HeroWrapper } from "@/components/motion"
+
+// Define a interface de projeto para o lado do cliente
+interface Project {
+  slug: string;
+  title: string;
+  description: string;
+  client: string;
+  date: string;
+  category: string;
+  services: string[];
+  image?: string;
+  images?: string[];
+}
 
 export default function Home() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     setMounted(true)
+    
+    // Função para buscar projetos da API
+    const fetchProjects = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch('/api/projects')
+        
+        if (!response.ok) {
+          throw new Error('Falha ao buscar projetos')
+        }
+        
+        const data = await response.json()
+        setProjects(data)
+      } catch (error) {
+        console.error('Erro ao carregar projetos:', error)
+        // Dados de fallback caso a API falhe
+        setProjects([
+          {
+            slug: 'portal-interdimensional',
+            title: "Portal Interdimensional",
+            category: "Desenvolvimento Web",
+            description: "Redesign completo com interface que transcende o espaço-tempo.",
+            client: "Corporação Nebulosa",
+            date: "2025-03-15",
+            services: ["Design UI/UX", "Desenvolvimento Frontend", "SEO"]
+          },
+          {
+            slug: 'ecommerce-jupteriano',
+            title: "E-commerce Premium Jupteriano",
+            category: "Loja Virtual",
+            description: "Plataforma de vendas completa com entregas em qualquer lua de Júpiter.",
+            client: "JupStore",
+            date: "2025-02-10",
+            services: ["E-commerce", "UX/UI Design", "Desenvolvimento Frontend", "Desenvolvimento Backend"]
+          },
+          {
+            slug: 'aplicacao-educacional-marciana',
+            title: "Aplicação Educacional Marciana",
+            category: "Aplicação Web",
+            description: "Sistema de aprendizado online que traduz conhecimento terrestre para qualquer espécie.",
+            client: "Academia Marciana",
+            date: "2025-01-20",
+            services: ["Desenvolvimento Web", "UX/UI Design", "Plataforma Educacional"]
+          }
+        ])
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    fetchProjects()
   }, [])
 
   // Don't render until mounted to prevent hydration issues
@@ -60,24 +125,6 @@ export default function Home() {
       icon: <PaintBucket className="h-5 w-5 text-primary" />,
       title: "Design UI/UX Alienígena",
       description: "Interfaces tão intuitivas que até ETs conseguem navegar sem tradutor."
-    }
-  ]
-
-  const projects = [
-    {
-      title: "Portal Interdimensional",
-      category: "Desenvolvimento Web",
-      description: "Redesign completo com interface que transcende o espaço-tempo."
-    },
-    {
-      title: "E-commerce Premium Jupteriano",
-      category: "Loja Virtual",
-      description: "Plataforma de vendas completa com entregas em qualquer lua de Júpiter."
-    },
-    {
-      title: "Aplicação Educacional Marciana",
-      category: "Aplicação Web",
-      description: "Sistema de aprendizado online que traduz conhecimento terrestre para qualquer espécie."
     }
   ]
 
@@ -266,30 +313,58 @@ export default function Home() {
               </StaggerItem>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map((project, index) => (
-                  <StaggerItem key={index}>
-                    <Link href={`/projetos/${project.category.toLowerCase().replace(/\s+/g, '-')}`}>
-                      <motion.div
-                        className="group cursor-pointer"
-                        whileHover={{ y: -5 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                      >
-                        <div className="aspect-video bg-accent/10 mb-4 overflow-hidden rounded-md">
-                          <div className="w-full h-full flex items-center justify-center relative">
-                            <div className="absolute inset-0 modern-gradient opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                            <span className="text-muted-foreground text-sm">Evidência Extraterrestre</span>
+                {loading ? (
+                  // Estado de carregamento
+                  Array.from({ length: 3 }).map((_, index) => (
+                    <StaggerItem key={`skeleton-${index}`}>
+                      <div className="p-6 border border-border bg-card">
+                        <div className="aspect-video bg-accent/10 mb-4 rounded-md animate-pulse"></div>
+                        <div className="h-6 w-24 bg-accent/10 rounded-full mb-4 animate-pulse"></div>
+                        <div className="h-8 w-full bg-accent/10 rounded-md mb-4 animate-pulse"></div>
+                        <div className="h-4 w-32 bg-accent/10 rounded-md animate-pulse"></div>
+                      </div>
+                    </StaggerItem>
+                  ))
+                ) : (
+                  // Projetos carregados
+                  projects.map((project) => (
+                    <StaggerItem key={project.slug}>
+                      <Link href={`/projetos/${project.slug}`}>
+                        <motion.div
+                          className="group cursor-pointer"
+                          whileHover={{ y: -5 }}
+                          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                        >
+                          <div className="aspect-video bg-accent/10 mb-4 overflow-hidden rounded-md">
+                            <div className="w-full h-full relative">
+                              {project.image ? (
+                                <motion.img
+                                  src={project.image}
+                                  alt={project.title}
+                                  className="w-full h-full object-cover"
+                                  initial={{ scale: 1 }}
+                                  whileHover={{ scale: 1.05 }}
+                                  transition={{ duration: 0.5 }}
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center">
+                                  <span className="text-muted-foreground text-sm">Evidência Extraterrestre</span>
+                                </div>
+                              )}
+                              <div className="absolute inset-0 modern-gradient opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="modern-badge inline-block mb-2">{project.category}</div>
-                        <h3 className="text-xl font-light mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                        <div className="flex items-center mt-4">
-                          <span className="text-sm mr-2 text-muted-foreground group-hover:text-primary transition-colors">Examinar missão</span>
-                          <ArrowRight className="h-4 w-4 text-primary" />
-                        </div>
-                      </motion.div>
-                    </Link>
-                  </StaggerItem>
-                ))}
+                          <div className="modern-badge inline-block mb-2">{project.category}</div>
+                          <h3 className="text-xl font-light mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                          <div className="flex items-center mt-4">
+                            <span className="text-sm mr-2 text-muted-foreground group-hover:text-primary transition-colors">Examinar missão</span>
+                            <ArrowRight className="h-4 w-4 text-primary" />
+                          </div>
+                        </motion.div>
+                      </Link>
+                    </StaggerItem>
+                  ))
+                )}
               </div>
 
               <StaggerItem>
