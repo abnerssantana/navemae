@@ -5,16 +5,19 @@ import { notFound } from "next/navigation";
 import { getProjectBySlug, getRelatedProjects } from "@/lib/projects";
 import { ProjectContent } from "@/components/project-content";
 
-// Definição correta do tipo dos parâmetros
-interface PageProps {
+// Define proper interface for page props
+interface ProjectPageProps {
   params: {
     slug: string;
   };
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+export async function generateMetadata(
+  props: ProjectPageProps
+): Promise<Metadata> {
+  // Correctly handle params in Next.js 15
+  const params = await Promise.resolve(props.params);
+  const project = getProjectBySlug(params.slug);
 
   if (!project) {
     return {
@@ -29,15 +32,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  // Correctly handle params in Next.js 15
+  const resolvedParams = await Promise.resolve(params);
+  const project = getProjectBySlug(resolvedParams.slug);
 
   if (!project) {
     notFound();
   }
 
-  const relatedProjects = await getRelatedProjects(slug, 3);
+  const relatedProjects = getRelatedProjects(resolvedParams.slug, 3);
   
   return (
     <div className="min-h-screen bg-background text-foreground">
