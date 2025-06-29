@@ -5,8 +5,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
-  title: "Nave Mãe | Desenvolvimento Web Profissional",
-  description: "Desenvolvimento web profissional para construir, escalar e otimizar sua presença online. Especialistas em sites dinâmicos, WordPress e SEO.",
+  title: "Nave Mãe Digital - Colonizamos o Universo Digital",
+  description: "Somos especialistas em desenvolvimento web de outro planeta. Criamos experiências digitais com tecnologia avançada para construir, escalar e colonizar sua presença online.",
 }
 
 export default function RootLayout({
@@ -15,16 +15,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className="dark">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${GeistSans.className} bg-background`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
+          defaultTheme="light"
+          enableSystem={true}
         >
-          <div className="max-w-screen-2xl mx-auto">
-            {children}
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>
