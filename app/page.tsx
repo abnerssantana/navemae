@@ -1,6 +1,6 @@
 "use client"
 
-import TerminalSimulator from "../terminal-simulator"
+import TerminalSimulator from "@/components/terminal-simulator"
 
 export default function Page() {
   return <TerminalSimulator />

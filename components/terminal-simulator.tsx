@@ -49,7 +49,22 @@ export default function TerminalSimulator() {
   const [currentCharIndex, setCurrentCharIndex] = useState(0)
   const [showCursor, setShowCursor] = useState(true)
   const [isTyping, setIsTyping] = useState(false)
+  const [currentTime, setCurrentTime] = useState<string>("")
+  const [isMounted, setIsMounted] = useState(false)
   const terminalRef = useRef<HTMLDivElement>(null)
+
+  // Handle client-side mounting
+  useEffect(() => {
+    setIsMounted(true)
+    setCurrentTime(new Date().toLocaleTimeString())
+    
+    // Update time every second
+    const timeInterval = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString())
+    }, 1000)
+
+    return () => clearInterval(timeInterval)
+  }, [])
 
   // Cursor blinking effect
   useEffect(() => {
@@ -148,12 +163,12 @@ export default function TerminalSimulator() {
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* CRT Monitor Effect */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-20"></div>
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-30"></div>
 
       {/* Scanlines */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="h-full w-full opacity-[0.03]"
+          className="h-full w-full opacity-[0.03] animate-scan"
           style={{
             backgroundImage:
               "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.1) 2px, rgba(0, 255, 0, 0.1) 4px)",
@@ -208,16 +223,16 @@ export default function TerminalSimulator() {
         {/* Terminal Status Bar */}
         <div className="bg-gray-900 px-4 py-1 text-xs text-gray-400 border-t border-gray-700 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <span>nave-mae@digital</span>
+            <span>contato@navemae.digital</span>
             <span>~</span>
             <span className={`${isTyping ? "text-green-400" : "text-gray-500"}`}>
               {isTyping ? "typing..." : "ready"}
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <span>UTF-8</span>
-            <span>bash</span>
-            <span>{new Date().toLocaleTimeString()}</span>
+            <span>TERRA-3</span>
+            <span className="text-yellow-400">XEON-OS</span>
+            <span>{isMounted ? currentTime : "--:--:--"}</span>
           </div>
         </div>
       </div>
