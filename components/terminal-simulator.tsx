@@ -38,7 +38,6 @@ const terminalLines: TerminalLine[] = [
   { text: "[>] contato@navemae.digital", delay: 18900, type: "output", email: "contato@navemae.digital" },
   { text: "[>] magictraining.run", delay: 19950, type: "output", link: "https://magictraining.run" },
   { text: "[!] Resposta em velocidade luz", delay: 21000, type: "success" },
-  { text: "nave-mae@digital:~$ ", delay: 22050, cursor: true, type: "command" },
   // Ideias para novas linhas:
   { text: "nave-mae@digital:~$ ideias", delay: 23000, type: "command" },
   { text: "- Inteligência Artificial aplicada ao seu negócio", delay: 23500, type: "output" },
