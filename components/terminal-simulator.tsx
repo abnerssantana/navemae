@@ -12,7 +12,7 @@ interface TerminalLine {
 }
 
 const terminalLines: TerminalLine[] = [
-  { text: "Last login: Sat Dec 30 14:23:17 on ttys000", delay: 0, type: "output" },
+  { text: "Last login: Sat Dec 30 14:23:17 on Marte", delay: 0, type: "output" },
   { text: "nave-mae@digital:~$ sudo access --universe", delay: 700, type: "command" },
   { text: "[sudo] password for navemae: ********", delay: 1750, type: "output" },
   { text: "ACCESS GRANTED [OK]", delay: 2800, type: "success" },
@@ -22,7 +22,7 @@ const terminalLines: TerminalLine[] = [
   { text: "E se você pudesse dominar o digital?", delay: 7000, type: "output" },
   { text: "nave-mae@digital:~$ ./iniciar_revolucao.sh", delay: 8050, type: "command" },
   { text: ">>> Iniciando protocolo de dominação digital...", delay: 9100, type: "warning" },
-  { text: "[####################] 100%", delay: 10500, type: "success" },
+  { text: "[####################] 100%", delay: 12500, type: "success" },
   { text: "nave-mae@digital:~$ grep -r 'projetos_ativos' ./", delay: 11550, type: "command" },
   {
     text: "./magic_training: Experimento #001 [ATIVO]",
@@ -183,11 +183,7 @@ export default function TerminalSimulator() {
         {/* Terminal Content */}
         <div
           ref={terminalRef}
-          className="flex-1 bg-black p-4 overflow-y-auto font-mono text-sm leading-relaxed"
-          style={{
-            fontFamily: '"SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Source Code Pro", monospace',
-            letterSpacing: "0.025em",
-          }}
+          className="flex-1 bg-black p-4 overflow-y-auto font-mono text-sm leading-4"
         >
           <div className="space-y-1">
             {displayedLines.map((line, index) => (
@@ -221,16 +217,16 @@ export default function TerminalSimulator() {
         </div>
 
         {/* Terminal Status Bar */}
-        <div className="bg-gray-900 px-4 py-1 text-xs text-gray-400 border-t border-gray-700 flex justify-between items-center">
-          <div className="flex items-center gap-4">
+        <div className="bg-black px-4 py-1 text-xs text-gray-200 border-t border-gray-800 flex justify-between items-center">
+          <div className="flex items-center gap-2">
             <span>contato@navemae.digital</span>
             <span>~</span>
             <span className={`${isTyping ? "text-green-400" : "text-gray-500"}`}>
               {isTyping ? "typing..." : "ready"}
             </span>
           </div>
-          <div className="flex items-center gap-4">
-            <span>TERRA-3</span>
+          <div className="flex items-center gap-2">
+            <span className="text-cyan-400 animate-pulse">NEURAL LINK</span>
             <span className="text-yellow-400">XEON-OS</span>
             <span>{isMounted ? currentTime : "--:--:--"}</span>
           </div>
