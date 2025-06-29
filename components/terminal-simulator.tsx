@@ -25,12 +25,12 @@ const terminalLines: TerminalLine[] = [
   { text: "[####################] 100%", delay: 12500, type: "success" },
   { text: "nave-mae@digital:~$ grep -r 'projetos_ativos' ./", delay: 11550, type: "command" },
   {
-    text: "./magic_training: Experimento #001 [ATIVO]",
+    text: "./magic_training: #001 [ON] -  Parece magia... mas é tecnologia",
     delay: 12600,
     type: "output",
     link: "https://magictraining.run",
   },
-  { text: "./projeto_x: [CLASSIFICADO - Lançamento em breve]", delay: 13650, type: "warning" },
+  { text: "./projet-X: [CONFIDENCIAL - Lançamento em breve]", delay: 13650, type: "warning" },
   { text: "./dominio_total: [EM DESENVOLVIMENTO]", delay: 14700, type: "output" },
   { text: "nave-mae@digital:~$ echo 'Pronto para embarcar?'", delay: 15750, type: "command" },
   { text: "Pronto para embarcar?", delay: 16800, type: "output" },
@@ -39,6 +39,14 @@ const terminalLines: TerminalLine[] = [
   { text: "[>] magictraining.run", delay: 19950, type: "output", link: "https://magictraining.run" },
   { text: "[!] Resposta em velocidade luz", delay: 21000, type: "success" },
   { text: "nave-mae@digital:~$ ", delay: 22050, cursor: true, type: "command" },
+  // Ideias para novas linhas:
+  { text: "nave-mae@digital:~$ ideias", delay: 23000, type: "command" },
+  { text: "- Inteligência Artificial aplicada ao seu negócio", delay: 23500, type: "output" },
+  { text: "- Sites ultra rápidos e responsivos", delay: 24000, type: "output" },
+  { text: "- Integrações com APIs e automações", delay: 24500, type: "output" },
+  { text: "- Dashboards e visualização de dados", delay: 25000, type: "output" },
+  { text: "- Consultoria em tecnologia e inovação", delay: 25500, type: "output" },
+  { text: "nave-mae@digital:~$ ", delay: 26000, cursor: true, type: "command" },
 ]
 
 export default function TerminalSimulator() {
@@ -161,29 +169,13 @@ export default function TerminalSimulator() {
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* CRT Monitor Effect */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-30"></div>
+    <div className="h-dvh bg-zinc-800 relative overflow-hidden">
 
-      {/* Scanlines */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="h-full w-full opacity-[0.03] animate-scan"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.1) 2px, rgba(0, 255, 0, 0.1) 4px)",
-          }}
-        ></div>
-      </div>
-
-      {/* Screen flicker */}
-      <div className="absolute inset-0 bg-green-400 opacity-[0.01] animate-pulse pointer-events-none"></div>
-
-      <div className="relative z-10 h-screen flex flex-col">
+      <div className="h-full relative z-10 flex flex-col">
         {/* Terminal Content */}
         <div
           ref={terminalRef}
-          className="flex-1 bg-black p-4 overflow-y-auto font-mono text-sm leading-4"
+          className="flex-1 bg-zinc-900 p-4 overflow-y-auto font-mono text-sm leading-4"
         >
           <div className="space-y-1">
             {displayedLines.map((line, index) => (
@@ -219,32 +211,19 @@ export default function TerminalSimulator() {
         {/* Terminal Status Bar */}
         <div className="bg-black px-4 py-1 text-xs text-gray-200 border-t border-gray-800 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <span>contato@navemae.digital</span>
+            <span className="text-green-400">contato@navemae.digital</span>
             <span>~</span>
             <span className={`${isTyping ? "text-green-400" : "text-gray-500"}`}>
               {isTyping ? "typing..." : "ready"}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <span className="text-cyan-400 animate-pulse">NEURAL LINK</span>
-            <span className="text-yellow-400">XEON-OS</span>
+            <span>-</span>
             <span>{isMounted ? currentTime : "--:--:--"}</span>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100vh); }
-        }
-        .animate-scan {
-          animation: scan 2s linear infinite;
-        }
-        .bg-gradient-radial {
-          background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
-        }
-      `}</style>
     </div>
   )
 }
