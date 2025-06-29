@@ -13,39 +13,38 @@ interface TerminalLine {
 
 const terminalLines: TerminalLine[] = [
   { text: "Last login: Sat Dec 30 14:23:17 on Marte", delay: 0, type: "output" },
-  { text: "nave-mae@digital:~$ sudo access --universe", delay: 700, type: "command" },
-  { text: "[sudo] password for navemae: ********", delay: 1750, type: "output" },
-  { text: "ACCESS GRANTED [OK]", delay: 2800, type: "success" },
-  { text: "nave-mae@digital:~$ cat segredo.txt", delay: 3850, type: "command" },
-  { text: "E se seu site pudesse fazer o impossível?", delay: 4900, type: "output" },
-  { text: "E se a tecnologia não tivesse limites?", delay: 5950, type: "output" },
-  { text: "E se você pudesse dominar o digital?", delay: 7000, type: "output" },
-  { text: "nave-mae@digital:~$ ./iniciar_revolucao.sh", delay: 8050, type: "command" },
-  { text: ">>> Iniciando protocolo de dominação digital...", delay: 9100, type: "warning" },
-  { text: "[####################] 100%", delay: 12500, type: "success" },
-  { text: "nave-mae@digital:~$ grep -r 'projetos_ativos' ./", delay: 11550, type: "command" },
+  { text: "nave-mae@digital:~$ sudo access --universe", delay: 300, type: "command" },
+  { text: "[sudo] password for navemae: ********", delay: 800, type: "output" },
+  { text: "ACCESS GRANTED [OK]", delay: 1200, type: "success" },
+  { text: "nave-mae@digital:~$ cat segredo.txt", delay: 1700, type: "command" },
+  { text: "E se seu site pudesse fazer o impossível?", delay: 2200, type: "output" },
+  { text: "E se a tecnologia não tivesse limites?", delay: 2700, type: "output" },
+  { text: "E se você pudesse dominar o digital?", delay: 3200, type: "output" },
+  { text: "nave-mae@digital:~$ ./iniciar_revolucao.sh", delay: 3700, type: "command" },
+  { text: ">>> Iniciando protocolo de dominação digital...", delay: 4200, type: "warning" },
+  { text: "[####################] 100%", delay: 5500, type: "success" },
+  { text: "nave-mae@digital:~$ grep -r 'projetos_ativos' ./", delay: 6000, type: "command" },
   {
     text: "./magic_training: #001 [ON] -  Parece magia... mas é tecnologia",
-    delay: 12600,
+    delay: 6500,
     type: "output",
     link: "https://magictraining.run",
   },
-  { text: "./projet-X: [CONFIDENCIAL - Lançamento em breve]", delay: 13650, type: "warning" },
-  { text: "./dominio_total: [EM DESENVOLVIMENTO]", delay: 14700, type: "output" },
-  { text: "nave-mae@digital:~$ echo 'Pronto para embarcar?'", delay: 15750, type: "command" },
-  { text: "Pronto para embarcar?", delay: 16800, type: "output" },
-  { text: "nave-mae@digital:~$ contact --show", delay: 17850, type: "command" },
-  { text: "[>] contato@navemae.digital", delay: 18900, type: "output", email: "contato@navemae.digital" },
-  { text: "[>] magictraining.run", delay: 19950, type: "output", link: "https://magictraining.run" },
-  { text: "[!] Resposta em velocidade luz", delay: 21000, type: "success" },
-  // Ideias para novas linhas:
-  { text: "nave-mae@digital:~$ ideias", delay: 23000, type: "command" },
-  { text: "- Inteligência Artificial aplicada ao seu negócio", delay: 23500, type: "output" },
-  { text: "- Sites ultra rápidos e responsivos", delay: 24000, type: "output" },
-  { text: "- Integrações com APIs e automações", delay: 24500, type: "output" },
-  { text: "- Dashboards e visualização de dados", delay: 25000, type: "output" },
-  { text: "- Consultoria em tecnologia e inovação", delay: 25500, type: "output" },
-  { text: "nave-mae@digital:~$ ", delay: 26000, cursor: true, type: "command" },
+  { text: "./projet-X: [CONFIDENCIAL - Lançamento em breve]", delay: 7000, type: "warning" },
+  { text: "./dominio_total: [EM DESENVOLVIMENTO]", delay: 7500, type: "output" },
+  { text: "nave-mae@digital:~$ echo 'Pronto para embarcar?'", delay: 8000, type: "command" },
+  { text: "Pronto para embarcar?", delay: 8500, type: "output" },
+  { text: "nave-mae@digital:~$ contact --show", delay: 9000, type: "command" },
+  { text: "[>] contato@navemae.digital", delay: 9500, type: "output", email: "contato@navemae.digital" },
+  { text: "[>] magictraining.run", delay: 10000, type: "output", link: "https://magictraining.run" },
+  { text: "[!] Resposta em velocidade luz", delay: 10500, type: "success" },
+  { text: "nave-mae@digital:~$ ideias", delay: 11000, type: "command" },
+  { text: "- Inteligência Artificial aplicada ao seu negócio", delay: 11300, type: "output" },
+  { text: "- Sites ultra rápidos e responsivos", delay: 11600, type: "output" },
+  { text: "- Integrações com APIs e automações", delay: 11900, type: "output" },
+  { text: "- Dashboards e visualização de dados", delay: 12200, type: "output" },
+  { text: "- Consultoria em tecnologia e inovação", delay: 12500, type: "output" },
+  { text: "nave-mae@digital:~$ ", delay: 13000, cursor: true, type: "command" },
 ]
 
 export default function TerminalSimulator() {
@@ -137,8 +136,8 @@ export default function TerminalSimulator() {
             }
           })
         },
-        Math.random() * 20 + 15,
-      ) // Variable typing speed for realism
+        Math.random() * 15 + 10,
+      ) // Faster variable typing speed for better UX
     }, currentLine.delay)
 
     return () => {
