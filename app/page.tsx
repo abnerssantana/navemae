@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-8 md:p-12 lg:p-16 bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen flex flex-col justify-center items-center p-8 md:p-12 lg:p-16">
       {/* Header */}
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
@@ -13,12 +13,11 @@ export default function Home() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="absolute top-8 left-8 md:top-12 md:left-12 lg:top-16 lg:left-16"
       >
-        <div className="relative">
-          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-normal tracking-tight">
             Nave Mãe
           </h1>
-          <p className="text-sm text-muted-foreground mt-1 font-medium">Digital</p>
-          <div className="absolute -bottom-1 left-0 w-8 h-0.5 bg-gradient-to-r from-primary to-primary/60 rounded-full"></div>
+          <p className="text-sm text-muted-foreground mt-1">Digital</p>
         </div>
       </motion.header>
 
