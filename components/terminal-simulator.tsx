@@ -14,7 +14,7 @@ interface TerminalLine {
 const terminalLines: TerminalLine[] = [
   { text: "Last login: Sat Dec 30 14:23:17 on Marte", delay: 0, type: "output" },
   { text: "nave-mae@digital:~$ sudo access --universe", delay: 300, type: "command" },
-  { text: "[sudo] password for navemae: ********", delay: 800, type: "output" },
+  { text: "[sudo] password for nave-mae: ********", delay: 800, type: "output" },
   { text: "ACCESS GRANTED [OK]", delay: 1200, type: "success" },
   { text: "nave-mae@digital:~$ cat segredo.txt", delay: 1700, type: "command" },
   { text: "E se seu site pudesse fazer o impossível?", delay: 2200, type: "output" },
