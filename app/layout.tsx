@@ -4,7 +4,7 @@ import { GeistSans } from "geist/font/sans"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Nave Mãe Digital - Colonizamos o Universo Digital",
+  title: "Nave Mãe - Colonizamos o Universo Digital",
   description: "Somos especialistas em desenvolvimento web de outro planeta. Criamos experiências digitais com tecnologia avançada para construir, escalar e colonizar sua presença online.",
 }
 

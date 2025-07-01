@@ -12,6 +12,136 @@ body {
   }
 }
 
+/* Animação de estrelas para o fundo espacial */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.stars::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 
+    779px 1331px #fff, 324px 42px #fff, 303px 586px #fff,
+    1312px 276px #fff, 451px 625px #fff, 521px 1931px #fff,
+    1087px 1871px #fff, 36px 1546px #fff, 132px 934px #fff,
+    1698px 901px #fff, 1418px 664px #fff, 1448px 1157px #fff,
+    1084px 232px #fff, 347px 1776px #fff, 1722px 243px #fff,
+    1629px 835px #fff, 479px 969px #fff, 1231px 960px #fff,
+    1124px 1761px #fff, 1263px 667px #fff, 1778px 793px #fff,
+    1284px 1967px #fff, 1893px 1797px #fff, 1985px 1089px #fff,
+    1567px 1484px #fff, 1587px 989px #fff, 534px 1827px #fff,
+    1333px 1133px #fff, 1999px 1139px #fff, 1943px 1621px #fff,
+    1860px 1583px #fff, 1880px 1715px #fff, 1351px 1831px #fff,
+    1582px 1916px #fff, 987px 1044px #fff, 1854px 1442px #fff,
+    893px 1048px #fff, 813px 1857px #fff, 343px 1304px #fff,
+    1384px 1902px #fff, 1769px 1093px #fff, 582px 474px #fff,
+    411px 1016px #fff, 1733px 1047px #fff, 1796px 1621px #fff,
+    1621px 1119px #fff, 1979px 1053px #fff, 1685px 1822px #fff,
+    763px 192px #fff, 1807px 1421px #fff;
+  animation: animStar 50s linear infinite;
+}
+
+.stars2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.stars2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 
+    1682px 1116px #fff, 1181px 1850px #fff, 1019px 1622px #fff,
+    1277px 1565px #fff, 1407px 1100px #fff, 1734px 1926px #fff,
+    1525px 1577px #fff, 1505px 1070px #fff, 1286px 1381px #fff,
+    1625px 1926px #fff, 1005px 866px #fff, 1790px 1393px #fff,
+    1685px 1590px #fff, 1084px 1278px #fff, 1051px 1209px #fff,
+    1323px 1410px #fff, 1428px 1049px #fff, 1521px 1052px #fff,
+    1442px 1196px #fff, 1409px 1013px #fff, 1067px 1071px #fff,
+    1247px 1426px #fff, 1632px 1838px #fff, 1617px 1148px #fff,
+    1433px 1452px #fff, 1049px 1707px #fff, 1245px 1020px #fff;
+  animation: animStar 100s linear infinite;
+}
+
+.stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.stars3::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 
+    1655px 1969px #fff, 1517px 1527px #fff, 1617px 1046px #fff,
+    1426px 1666px #fff, 1530px 1823px #fff, 1146px 1754px #fff,
+    1687px 1922px #fff, 1662px 1372px #fff, 1218px 1627px #fff,
+    1387px 1952px #fff, 1031px 1898px #fff, 1850px 1049px #fff,
+    1543px 1423px #fff, 1748px 1067px #fff, 1364px 1222px #fff,
+    1189px 1657px #fff, 1940px 1008px #fff, 1343px 1652px #fff,
+    1252px 1137px #fff, 1097px 1517px #fff, 1562px 1216px #fff;
+  animation: animStar 150s linear infinite;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+/* Animação do gradiente do título */
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 6s ease infinite;
+}
+
+/* Delays para animação de pulse */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
